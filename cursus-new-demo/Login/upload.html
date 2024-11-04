@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Video to Vimeo</title>
+</head>
+<body>
+    <h2>Upload Video to Vimeo</h2>
+    <form id="uploadForm">
+        <input type="file" id="videoFile" accept="video/*" required>
+        <button type="submit">Upload</button>
+    </form>
+    <p id="status"></p>
+
+    <!-- Include tus.js for resumable uploads -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tus-js-client/2.3.1/tus.min.js"></script>
+
+    <script>
+        document.getElementById('uploadForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const fileInput = document.getElementById('videoFile');
+            const file = fileInput.files[0];
+            if (!file) {
+                alert('Please select a video file.');
+                return;
+            }
+
+            // Update with your Vimeo Access Token
+            const accessToken = '147416799fec90565ed747be7181462c'; // Replace with your actual access token.
+
+            // Display status
+            document.getElementById('status').textContent = 'Uploading...';
+
+            fetch('https://api.vimeo.com/me/videos', {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${accessToken}`,
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/vnd.vimeo.*+json;version=3.4'
+                },
+                body: JSON.stringify({
+                    upload: {
+                        approach: 'tus',
+                        size: file.size
+                    }
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                const uploadLink = data.upload.upload_link;
+
+                // Use tus.js for resumable uploads
+                const upload = new tus.Upload(file, {
+                    endpoint: uploadLink,
+                    retryDelays: [0, 3000, 5000, 10000, 20000],
+                    onError: function (error) {
+                        document.getElementById('status').textContent = `Failed: ${error}`;
+                    },
+                    onProgress: function (bytesUploaded, bytesTotal) {
+                        const percentage = ((bytesUploaded / bytesTotal) * 100).toFixed(2);
+                        document.getElementById('status').textContent = `Uploading: ${percentage}%`;
+                    },
+                    onSuccess: function () {
+                        document.getElementById('status').textContent = 'Upload successful!';
+                    }
+                });
+
+                upload.start();
+            })
+            .catch(error => {
+                document.getElementById('status').textContent = `Error: ${error.message}`;
+            });
+        });
+    </script>
+</body>
+</html>

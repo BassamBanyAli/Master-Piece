@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+New! Keyboard shortcuts … Drive keyboard shortcuts have been updated to give you first-letters navigation
+ 
+  
+    <div class="col-12">
+        <div class="form-group text required">
+            <label for="title">Title</label>
+            <input type="text" name="title" id="title"    class="form-control"  >
+        </div>
+        <div class="form-group textarea required">
+            <label for="description">Description</label>
+            <input type="text" id="description" name="description" >
+        </div>
+        <div class="form-group text">
+            <label for="domain">Domain</label>
+            <input type="text" name="domain" id="domain" class="form-control">
+        </div>                    
+        <input type="hidden" id="endpoint" name="endpoint" value="">
+        <input type="hidden" id="chunksize" name="chunksize">
+        <input type="hidden" id="paralleluploads" name="paralleluploads" value="1">
+        <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet">
+        <input id="uploadVideoFile" type="file">
+        <br>
+        <br>
+        <div class="row">
+            <div class="span8">
+                <div class="progress progress-striped progress-success">
+                    <div class="bar" style="width: 0%;">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <input type="hidden" value="" name="link" id="link">
+    </div>
+    <div class="card-footer">
+        <button type="button" id="but_submit" class="btn btn-primary">Submit</button>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js">
+            
+    </script>
+<script src="tus.js">
+    
+</script>
+<script src="demo.js">
+    
+</script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/tus-js-client@latest/dist/tus.js">
+        
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/tus-js-client@latest/dist/tus.min.js">
+        
+    </script>
+    <script>
+         $(document).ready(function(){
+        $("#videoSourceWrapper").hide();
+    });
+    
+    
+      
+     var offset  = 0;
+        $(function () {
+            $("#but_submit").click(async () => {
+                
+                var file =document.getElementById('uploadVideoFile').files[0];
+                console.log(file.size);
+                document.getElementById("but_submit").disabled = true;
+                document.getElementById('but_submit').innerHTML='<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span><span>Loading...</span>';
+                const api = await fetch("https://api.vimeo.com/me/videos", {
+                headers: {
+                    Authorization: "Bearer 321c051f688cc29a6187474f1af4f525",
+                    "Content-Type": "application/json",
+                    Accept: "application/vnd.vimeo.*+json;version=3.4",
+                },
+                method: "POST",
+                body: JSON.stringify({
+                    upload: {
+                    approach: "tus",
+                    size:file.size,
+                    //   redirect_url: "http://localhost:3000",
+                    },
+                    name: document.getElementById('title').value,
+                    description: document.getElementById('description').value,
+                    privacy:{
+                    view : "nobody",
+                    embed : "whitelist",
+                    }
+                }),
+                });
+                const res = await api.json();
+                var link = res.link;
+                if(link==null || link=='') {
+                    alert('oops please try again ')
+                    return '';
+                }
+                if(link) {
+                    id= link.split('/')[3];
+                    console.log("===> id", id);
+                    console.log("===>  size", file.size);
+                        $.ajax({
+                        type: 'GET',
+                        url:   "https://api.vimeo.com/videos/"+id+"/privacy/domains/"+document.getElementById('domain').value,
+                        headers:  {
+                            Authorization: "Bearer 321c051f688cc29a6187474f1af4f525",
+                            "Content-Type": "application/json",
+                            Accept: "application/vnd.vimeo.*+json;version=3.4",
+                        },
+                        contentType: 'application/json',
+                        dataType: 'json'
+                        }).done(function(data) {
+                            console.log(data);
+                            console.log('data called success');
+                        });
+                }
+                document.getElementById('link').value=link;
+                const uploadLink = res.upload?.upload_link;
+                console.log("===>uploadLink ", uploadLink);
+                document.getElementById('endpoint').value=uploadLink;
+                 startUpload();
+                
+             });
+    
+        });
+    
+    
+      </script>
+    
+
+
+</body>
+</html>
