@@ -93,9 +93,74 @@ getProfile();
 
 
 function handleInstructorClick(instructorId) {
-    localStorage.setItem('instructorId', instructorId); // Store the instructor ID
-    window.location.href = "../instructor_profile_view.html"; // Update this URL to match your routing
+    debugger;
+
+    const profileImage = document.getElementById("profile-image");
+
+    if (profileImage) {
+        // Store the instructor ID and navigate if profileImage exists
+        localStorage.setItem('instructorId', instructorId);
+        window.location.href = "../instructor_profile_viewLogin.html";
+    } else {
+        // Store the instructor ID and navigate if profileImage does not exist
+        localStorage.setItem('instructorId', instructorId);
+        window.location.href = "../instructor_profile_view.html"; // Update this URL to match your routing
+    }
 }
+
+
+
+
+
+
+
+
+
+async function getProfile() {
+    debugger;
+    var id = localStorage.getItem("id");
+    var url = `https://localhost:7246/api/Users/getProfile?userId=${id}`;
+
+    try {
+        var response = await fetch(url, {
+            method: "GET"
+        });
+
+        if (response.ok) {
+            var result = await response.json();
+
+            // Check if elements exist before updating them
+            const profileImage = document.getElementById("profile-image");
+            const firstProfileImage = document.getElementById("firstProfile-image");
+            const profileName = document.getElementById("profile-name");
+            const profileEmail = document.getElementById("profile-email");
+
+            if (profileImage) {
+                profileImage.src = `https://localhost:7246/uploads/${result.image}`;
+            }
+            if (firstProfileImage) {
+                firstProfileImage.src = `https://localhost:7246/uploads/${result.image}`;
+            }
+            if (profileName) {
+                profileName.textContent = result.fullName;
+            }
+            if (profileEmail) {
+                profileEmail.textContent = result.email;
+            }
+
+        } else {
+            const errorData = await response.json();
+            alert('Error: ' + (errorData.message || 'Profile retrieval failed'));
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        alert('An error occurred while retrieving the profile. Please try again.');
+    }
+}
+
+getProfile();
+
+
 
 
 

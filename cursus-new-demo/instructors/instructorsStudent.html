@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 	
@@ -30,91 +30,17 @@
 		<link href="../vendor/bootstrap-select/docs/docs/dist/css/bootstrap-select.min.css" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href="../vendor/semantic/semantic.min.css">	
 		<style>
-			.fcrse_1 {
-    width: 100%; /* or a specific width e.g., 300px */
-    height: 400px; /* Fixed height */
-    overflow: hidden; /* Hide overflow */
-    position: relative; /* For absolute positioning of the overlay */
+			#firstProfile-image {
+    width: 40px; /* Adjust as needed */
+    height: 40px; /* Adjust as needed */
+    border-radius: 50%; /* Makes the image round */
 }
 
-.fcrse_img img {
-    width: 100%; /* Make the image fill the card */
-    height: 200px; /* Set a fixed height for images */
-    object-fit: cover; /* Ensure the image covers the area without distortion */
-    display: block; /* Remove bottom space under image */
+#profile-image {
+    width: 40px; /* Adjust as needed */
+    height: 40px; /* Adjust as needed */
+    border-radius: 50%; /* Makes the image round */
 }
-
-.fcrse_content {
-    height: calc(100% - 200px); /* Adjust content height based on image height */
-    padding: 10px; /* Add some padding */
-    box-sizing: border-box; /* Ensure padding doesn't affect total height */
-}
-
-
-
-
-
-
-
-
-.categories-section {
-    margin-top: 20px;
-}
-
-.category-card {
-    background-color: #f4f4f4; /* Default background color */
-    border-radius: 8px; /* Rounded corners */
-    padding: 20px;
-	margin: 5px; /* Padding inside the card */
-    text-align: center; /* Center align text */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
-    transition: transform 0.3s; /* Animation on hover */
-}
-
-.category-card:hover {
-    transform: scale(1.05); /* Scale up on hover */
-}
-
-.category1 { 
-    background-color: #b03939; /* Light red/pink */
-} /* Light red/pink */
-
-.category2 { 
-    background-color: #ffe6cc; /* Light peach */
-} /* Light peach */
-
-.category3 { 
-    background-color: #474755; /* Light mint green */
-} /* Light mint green */
-
-.category4 { 
-    background-color: #ccf2ff; /* Light sky blue */
-} /* Light sky blue */
-
-.category5 { 
-    background-color: #e6ccff; /* Light lavender */
-} /* Light lavender */
-
-.category6 { 
-    background-color: #ffffcc; /* Light yellow */
-} /* Light yellow */
-
-.category7 { 
-    background-color: #f9d6d6; /* Light coral */
-} /* Light coral */
-
-.category-all { 
-    background-color: #ffe6f2; /* Light blush */
-} /* Light blush */
-
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .category-card {
-        margin-bottom: 15px; /* Space between cards on smaller screens */
-    }
-}
-
 
 		</style>
 		
@@ -131,23 +57,51 @@
 			<span class="collapse_menu--label"></span>
 		</button>
 		<div class="main_logo" id="logo">
-			<a href="index.html"><img src="../images/logo.svg" alt=""></a>
-			<a href="index.html"><img class="logo-inverse" src="../images/ct_logo.svg" alt=""></a>
+			<a href="index.html"><img src="images/logo.svg" alt=""></a>
+			<a href="index.html"><img class="logo-inverse" src="images/ct_logo.svg" alt=""></a>
 		</div>
 
 		<div class="header_right">
 			<ul>
 				<li>
-					<a href="../cart/shopping_cart.html" class="option_links" title="cart"><i class='uil uil-shopping-cart-alt'></i><span class="noti_count">2</span></a>
+					<a href="Login/sign_up.html" class="upload_btn" title="Create New Course">Become an Instructor</a>
 				</li>
 				<li>
-					<a href="../Login/sign_up.html" class="upload_btn" title="Create New Course">Become an Instructor</a>
+					<a href="cart/shopping_cart.html" class="option_links" title="cart"><i class='uil uil-shopping-cart-alt'></i><span class="noti_count">2</span></a>
 				</li>
 
-				<li>
-					<a href="../Login/sign_in.html" class="upload_btn" title="Create New Course">sign in</a>
+				<li class="profile-dropdown">
+					<a href="#" class="opts_account" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+						<img id="firstProfile-image" src="images/hd_dp.jpg" alt="">
+					</a>
+					<div class="dropdown-menu dropdown_account drop-down dropdown-menu-end">
+						<div class="channel_my">
+							<div class="profile_link">
+								<img id="profile-image" src="images/hd_dp.jpg" alt="Profile Image">
+								<div class="pd_content">
+									<div class="rhte85">
+										<h6 id="profile-name">Joginder Singh</h6>
+										<div class="mef78" title="Verify">
+											<i class='uil uil-check-circle'></i>
+										</div>
+									</div>
+									<span id="profile-email">gambol943@gmail.com</span>
+								</div>							
+							</div>
+							
+							<a href="Profile/my_student_profile_view.html" class="dp_link_12">View User Profile</a>						
+						</div>
+						<div class="night_mode_switch__btn">
+							<a href="#" id="night-mode" class="btn-night-mode">
+								<i class="uil uil-moon"></i> Night mode
+								<span class="btn-night-mode-switch">
+									<span class="uk-switch-button"></span>
+								</span>
+							</a>
+						</div>
+						<a href="Login/sign_in.html" class="item channel_item" onclick="signOut()">Sign Out</a>
+					</div>
 				</li>
-
 			</ul>
 		</div>
 	</header>
@@ -158,24 +112,29 @@
 			<div class="left_section">
 				<ul>
 					<li class="menu--item">
-						<a href="indexBeforeLogin.html" class="menu--link" title="Home">
+						<a href="../index.html" class="menu--link" title="Home">
 							<i class='uil uil-home-alt menu--icon'></i>
 							<span class="menu--label">Home</span>
 						</a>
 					</li>
 					<li class="menu--item">
-						<a href="explore.html" class="menu--link active" title="Explore">
+						<a href="../courses.html" class="menu--link" title="Explore">
 							<i class='uil uil-search menu--icon'></i>
 							<span class="menu--label">Courses</span>
 						</a>
 					</li>
+                    <li class="menu--item">
+						<a href="../beforeLogin/myCourses.html" class="menu--link" title="Saved Courses">
+						  <i class="uil uil-heart-alt menu--icon"></i>
+						  <span class="menu--label">My Courses</span>
+						</a>
+					</li>
 					<li class="menu--item">
-						<a href="../instructors/instructors.html" class="menu--link" title="Explore">
+						<a href="instructors/instructorsStudent.html" class="menu--link active" title="Explore">
 							<i class='uil uil-search menu--icon'></i>
 							<span class="menu--label">Instructors</span>
 						</a>
 					</li>
-
 
 
 
@@ -232,62 +191,22 @@
 
 					<div class="col-md-12">
 						<div class="_14d25">
-							<div class="categories-section mt-4">
-								<div class="row">
-									<div class="col-lg-3 col-md-6">
-										<div class="category-card category-all red-category-card" onclick="explore()">
-											<h4>All Categories</h4>
-										</div>
-									</div>
-									<div class="col-lg-3 col-md-6">
-										<div class="category-card category1 blue-category-card" onclick="fetchCoursesByCategory('Computer Engineering')">
-											<h4>Computer Engineering</h4>
-										</div>
-									</div>
-									<div class="col-lg-3 col-md-6">
-										<div class="category-card category2 green-category-card" onclick="fetchCoursesByCategory('Telecommunications Engineering')">
-											<h4>Telecommunications Engineering</h4>
-										</div>
-									</div>
-									<div class="col-lg-3 col-md-6">
-										<div class="category-card category3 yellow-category-card" onclick="fetchCoursesByCategory('Computer Science')">
-											<h4>Computer Science</h4>
-										</div>
-									</div>
-									<div class="col-lg-3 col-md-6">
-										<div class="category-card category4 purple-category-card" onclick="fetchCoursesByCategory('Artificial Intelligence')">
-											<h4>Artificial Intelligence</h4>
-										</div>
-									</div>
-									<div class="col-lg-3 col-md-6">
-										<div class="category-card category5 orange-category-card" onclick="fetchCoursesByCategory('Cyber Security')">
-											<h4>Cyber Security</h4>
-										</div>
-									</div>
-									<div class="col-lg-3 col-md-6">
-										<div class="category-card category6 pink-category-card" onclick="fetchCoursesByCategory('Software Engineering')">
-											<h4>Software Engineering</h4>
-										</div>
-									</div>
-									<div class="col-lg-3 col-md-6">
-										<div class="category-card category7 teal-category-card" onclick="fetchCoursesByCategory('Biomedical Engineering')">
-											<h4>Biomedical Engineering</h4>
-										</div>
-									</div>
-								</div>
-							</div>
-							
-							
-							
 							<div class="row" id="container">
-								<!-- Existing dynamic instructor cards will be here -->
-							</div>
-							
-							<!-- New categories section -->
 
-						</div>                
-					</div>
+
 								
+								
+								
+								
+
+
+
+								
+
+				
+							</div>				
+						</div>				
+					</div>				
 				</div>
 			</div>
 		</div>
@@ -370,7 +289,7 @@
 	<script src="../js/custom.js"></script>
 	<script src="../js/night-mode.js"></script>
 
-	<script src="explore.js"></script>
+	<script src="instructors.js"></script>
 	
 	
 	

@@ -49,19 +49,16 @@ async function featuredCources() {
         container.innerHTML += `	
         <div class="col-lg-3 col-md-4">
             <div class="fcrse_1 mt-30">
-                <a href="courseDetail.html" class="fcrse_img" onclick="handleCourseClick(${element.courseId})">
+                <a href="course_detail_view.html" class="fcrse_img" onclick="handleCourseClick(${element.courseId})">
                     <img src="https://localhost:7246/uploads/${element.image}" alt="">
                     <div class="course-overlay">
                         <span class="play_btn1"><i class="uil uil-play"></i></span>
                     </div>
                 </a>
                 <div class="fcrse_content">
-                    <div class="vdtodt">
-                        <span class="vdt14">109k views</span>
-                        <span class="vdt14">15 days ago</span>
-                    </div>
-                    <a href="courseDetail.html" class="crse14s" onclick="handleCourseClick(${element.courseId})">${element.courseName}</a>
-                    <a href="courseDetail.html" class="crse-cate" onclick="handleCourseClick(${element.courseId})">${element.departement}</a>
+
+                    <a href="course_detail_view.html" class="crse14s" onclick="handleCourseClick(${element.courseId})">${element.courseName}</a>
+                    <a href="course_detail_view.html" class="crse-cate" onclick="handleCourseClick(${element.courseId})">${element.department}</a>
                     <div class="auth1lnkprce">
                         <p class="cr1fot">By <a href="#">${element.courseAuthor}</a></p>
                     </div>
@@ -103,7 +100,7 @@ async function recentCourses() {
         });
 
         // Take only the first 4 recent courses
-        const recentCoursesLimited = recentCourses.slice(0, 4);
+        const recentCoursesLimited = recentCourses.slice(0, 2);
 
         // Clear previous content in the container
         const container = document.getElementById("container2");
@@ -118,19 +115,16 @@ async function recentCourses() {
             container.innerHTML += `
                 <div class="col-lg-3 col-md-4">
                     <div class="fcrse_1 mt-30">
-                        <a href="courseDetail.html" class="fcrse_img" onclick="handleCourseClick(${element.courseId})">
+                        <a href="course_detail_view.html" class="fcrse_img" onclick="handleCourseClick(${element.courseId})">
                             <img src="https://localhost:7246/uploads/${element.image}" alt="">
                             <div class="course-overlay">
                                 <span class="play_btn1"><i class="uil uil-play"></i></span>
                             </div>
                         </a>
                         <div class="fcrse_content">
-                            <div class="vdtodt">
-                                <span class="vdt14">109k views</span>
-                                <span class="vdt14">15 days ago</span>
-                            </div>
-                            <a href="courseDetail.html" class="crse14s" onclick="handleCourseClick(${element.courseId})">${element.courseName}</a>
-                            <a href="courseDetail.html" class="crse-cate" onclick="handleCourseClick(${element.courseId})">${element.departement}</a>
+
+                            <a href="course_detail_view.html" class="crse14s" onclick="handleCourseClick(${element.courseId})">${element.courseName}</a>
+                            <a href="course_detail_view.html" class="crse-cate" onclick="handleCourseClick(${element.courseId})">${element.department}</a>
                             <div class="auth1lnkprce">
                                 <p class="cr1fot">By <a href="#">${element.courseAuthor}</a></p>
                             </div>
@@ -159,6 +153,7 @@ async function get() {
     // Fetch the instructor data from the API
     var response = await fetch(url);
     var result = await response.json();
+    console.log(result);
 
     // Limit the number of displayed instructors to 4
     const recentCoursesLimited = result.slice(0, 4);
@@ -168,35 +163,28 @@ async function get() {
 
     // Loop through the limited set of instructors
     recentCoursesLimited.forEach(element => {
-        // Create columns and append them to the row
         container.innerHTML += `
             <div class="col-lg-3 col-md-4">
-                <div class="fcrse_1 mt-30">
+                <div class="fcrse_1 mt-30" onclick="navigateToProfile(${element.instructorId})">
                     <div class="tutor_img">
-                        <a href="../instructor_profile_view.html">
-                            <img src="https://localhost:7246/uploads/${element.image}" alt="Instructor Image">
-                        </a>
+                        <img src="https://localhost:7246/uploads/${element.image}" alt="Instructor Image">
                     </div>
                     <div class="tutor_content_dt">
                         <div class="tutor150">
-                            <a href="../instructor_profile_view.html" class="tutor_name">${element.fullName}</a>
+                            <a class="tutor_name">${element.fullName}</a>
                             <div class="mef78" title="Verify">
                                 <i class="uil uil-check-circle"></i>
                             </div>
                         </div>
                         <div class="tutor_cate">${element.department || 'Department Not Available'}</div>
 
-                        <div class="tut1250">
-                            <span class="vdt15">100K Students</span>
-                            <span class="vdt15">15 Courses</span>
-                        </div>
                     </div>
                 </div>
             </div>
         `;
     });
+    
 }
-
 get();
 
 

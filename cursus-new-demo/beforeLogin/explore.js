@@ -96,8 +96,6 @@ function handleSearchInput() {
 
 // Initial call to load courses
 explore();
-getProfile();
-
 
 
 

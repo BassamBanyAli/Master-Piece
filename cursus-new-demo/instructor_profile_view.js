@@ -47,6 +47,42 @@ getProfile();
 
 
 
+async function getProfileUser() {
+    debugger;
+    var id = localStorage.getItem("id");
+    var url = `https://localhost:7246/api/Users/getProfile?userId=${id}`;
+
+    try {
+        var response = await fetch(url, {
+            method: "GET"
+        });
+
+        if (response.ok) {
+            var result = await response.json();
+
+            // Update the profile image, name, and email
+            document.getElementById("profile-image").src = `https://localhost:7246/uploads/${result.image}`;
+            document.getElementById("firstProfile-image").src = `https://localhost:7246/uploads/${result.image}`;
+            document.getElementById("profile-name").textContent = result.fullName;
+            document.getElementById("profile-email").textContent = result.email;
+
+        } else {
+            const errorData = await response.json();
+            alert('Error: ' + (errorData.message || 'Profile retrieval failed'));
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        alert('An error occurred while retrieving the profile. Please try again.');
+    }
+}
+
+getProfileUser();
+
+
+
+
+
+
 
 async function courses() {
     debugger;
