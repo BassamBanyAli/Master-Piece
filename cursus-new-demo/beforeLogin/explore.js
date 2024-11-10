@@ -25,7 +25,7 @@ async function explore() {
                             <p class="cr1fot">By <a href="#">${element.courseAuthor}</a></p>
                             <div id="coursePrice" class="prce142">$${element.price}</div>
                             <button class="shrt-cart-btn" title="cart">
-                                <i class="uil uil-shopping-cart-alt" onclick="saveInLocalStorage(${element.courseId}, '${element.courseName}', '${element.department}', '${element.price}', '${element.image}')"></i>
+                                <i class="uil uil-shopping-cart-alt" onclick="saveInLocalStorage(${element.courseId})"></i>
                             </button>
                         </div>
                     </div>
@@ -109,18 +109,22 @@ function handleCourseClick(element) {
 }
 
 
-async function saveInLocalStorage(courseId, name, department, price, image) {
-    debugger;
+async function saveInLocalStorage() {
+    const courseId = localStorage.getItem("courseId");
     // Get the content or values of the elements
-
-
+    const description = document.getElementById("description").innerText;
+    const name = document.getElementById("courseName").innerText;
+    const title = document.getElementById("courseTitle").innerText;
+    const price = document.getElementById("coursePrice").innerText;
+    const image=localStorage.getItem("image");
 
     // Create a new course object
     const newCourseData = {
         courseId,
         image,
+        description,
         name,
-        department,
+        title,
         price
     };
 

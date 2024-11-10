@@ -61,18 +61,40 @@ async function course_details() {
         const description = document.getElementById("description");
         const name = document.getElementById("courseName");
         const title = document.getElementById("courseTitle");
-        const price = document.getElementById("coursePrice");
+        const department = document.getElementById("department");
+
+        const date = document.getElementById("date");
         const videoPlayer = document.getElementById("videoPlayer");
         const image = document.getElementById("image");
+
+
+localStorage.setItem("instructorId",result.instructorId);
+        var messageButton = document.createElement("button");
+        messageButton.className = "subscribe-btn btn500";
+        messageButton.textContent = "View Instructor Profile";
+        messageButton.onclick = function () {
+            window.location.href = "instructor_profile_viewLogin.html";
+        };
+        
+        document.getElementById("messageButtonContainer").appendChild(messageButton);
+
+
+
+        // Convert createdAt to Date object and format it
+        const createdAtDate = new Date(result.createdAt); // Convert string to Date object
+        const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+        const formattedDate = createdAtDate.toLocaleDateString('en-US', options); // Format date
 
         // Set the content with data from the result
         description.innerHTML = result.courseDescription || 'No description available';
         name.innerHTML = result.courseName || 'No name available';
         title.innerHTML = result.courseTitle || 'No title available';
+        department.innerHTML = result.department || 'No department available';
 
+        date.innerHTML = formattedDate; // Display formatted date
         videoPlayer.src = result.tutorialVideo;
         image.src = `https://localhost:7246/uploads/${result.image}`; // Use result.image
-        localStorage.setItem("image",result.image);
+        localStorage.setItem("image", result.image);
 
     } catch (error) {
         console.error('Error fetching course details:', error);

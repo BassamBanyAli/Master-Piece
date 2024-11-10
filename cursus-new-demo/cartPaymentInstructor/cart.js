@@ -1,5 +1,5 @@
 async function getItems() {
-    let courseDataArray = JSON.parse(localStorage.getItem("courseDataArray")) || [];
+    let newCourseDataArray = JSON.parse(localStorage.getItem("newCourseDataArray")) || [];
     let container = document.getElementById("container");
     let totalPriceElement = document.getElementById("total");
     let totalAfterDiscount = document.getElementById("totalAfterDiscount");
@@ -9,13 +9,13 @@ async function getItems() {
     totalPriceElement.innerHTML = '';
     totalAfterDiscount.innerHTML = '';
 
-    if (courseDataArray.length === 0) {
+    if (newCourseDataArray.length === 0) {
         container.innerHTML = `
             <div class="empty-cart-message">
                 <h2>Your Cart is Empty!</h2>
                 <p>It seems you haven't added any courses to your cart yet.</p>
                 <p>Start exploring our courses to find what you love!</p>
-                <a href="../beforeLogin/explore.html" class="browse-courses-btn">Browse Courses</a>
+                <a href="../create_new_course.html" class="browse-courses-btn">Create New Courses</a>
             </div>
         `;
         totalPriceElement.innerHTML = '0.00';
@@ -24,7 +24,7 @@ async function getItems() {
     }
     let totalPrice = 0;
 
-    courseDataArray.forEach((element, index) => {
+    newCourseDataArray.forEach((element, index) => {
         // Clean price to ensure it's a number
         let price = parseFloat(element.price.toString().replace(/[^0-9.]/g, '')) || 0;
 
@@ -41,7 +41,7 @@ async function getItems() {
                     <a href="../course_detail_view.html" class="crse14s title900 pt-2">${element.name}</a>
                     <a href="../#" class="crse-cate">${element.title}</a>
                     <div class="auth1lnkprce">
-                        <p class="cr1fot">By <a href="../#">${element.courseAuth}</a></p>
+
                         <div class="prce142">${price.toFixed(2)}</div>
                     </div>
                 </div>
@@ -72,7 +72,7 @@ function isLoggedIn() {
 
 function redirectToCheckout() {
     if (isLoggedIn()) {
-        window.location.href = '../payement/index.html'; // Navigate to checkout page
+        window.location.href = 'index.html'; // Navigate to checkout page
     } else {
         alert('You need to log in first.');
         window.location.href = '../Login/sign_in.html'; // Redirect to login page
@@ -84,13 +84,13 @@ document.getElementById('checkoutButton').addEventListener('click', redirectToCh
 
 function removeItem(index) {
     // Get current array from local storage
-    let courseDataArray = JSON.parse(localStorage.getItem("courseDataArray")) || [];
+    let newCourseDataArray = JSON.parse(localStorage.getItem("newCourseDataArray")) || [];
 
     // Remove the item at the given index
-    courseDataArray.splice(index, 1);
+    newCourseDataArray.splice(index, 1);
 
     // Update local storage with the new array
-    localStorage.setItem("courseDataArray", JSON.stringify(courseDataArray));
+    localStorage.setItem("newCourseDataArray", JSON.stringify(newCourseDataArray));
 
     // Remove the card from the DOM
     document.getElementById(`course-${index}`).remove();
@@ -104,10 +104,10 @@ async function saveToCartTable() {
     const id = localStorage.getItem('id'); // User ID stored in localStorage
     if (id !== null) {
         // Retrieve the courseDataArray from localStorage
-        let courseDataArray = JSON.parse(localStorage.getItem("courseDataArray"));
+        let newCourseDataArray = JSON.parse(localStorage.getItem("newCourseDataArray"));
 
         // Create an array of AddToCartDTOs with UserId and CourseId
-        const cartItems = courseDataArray.map(course => {
+        const cartItems = newCourseDataArray.map(course => {
             return {
                 UserId: id,           // User ID from localStorage
                 CourseId: course.courseId // Course ID from the courseDataArray

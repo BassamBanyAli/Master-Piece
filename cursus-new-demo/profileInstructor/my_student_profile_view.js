@@ -35,8 +35,9 @@ getProfile();
 
 
 async function orders() {
-    const id = localStorage.getItem("id");
-    const url = `https://localhost:7246/api/UserPayments/GetOrdersByUser/${id}`;
+    debugger;
+    const id = localStorage.getItem("instructorId");
+    const url = `https://localhost:7246/api/InstructorPayment/GetOrdersByInstructor/${id}`;
     const response = await fetch(url);
     const result = await response.json();
 

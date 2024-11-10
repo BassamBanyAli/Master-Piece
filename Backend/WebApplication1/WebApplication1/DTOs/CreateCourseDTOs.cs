@@ -2,6 +2,7 @@
 {
     public class CreateCourseDTOs
     {
+        public int InstructorId { get; set; }
         public string CourseName { get; set; }
         public string CourseDescription { get; set; }
         public string CourseTitle { get; set; }

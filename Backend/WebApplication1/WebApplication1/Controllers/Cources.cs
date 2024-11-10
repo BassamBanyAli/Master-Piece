@@ -79,7 +79,6 @@ namespace WebApplication1.Controllers
                 return BadRequest("Invalid sections format.");
             }
 
-            // Continue with the rest of your logic...
             string imageFileName = null;
             if (model.Image != null)
             {
@@ -88,18 +87,21 @@ namespace WebApplication1.Controllers
 
             var course = new Course
             {
+                InstructorId = model.InstructorId,
                 CourseName = model.CourseName,
                 CourseDescription = model.CourseDescription,
                 CourseTitle = model.CourseTitle,
                 Image = imageFileName,
                 Department = model.Debartment,
                 Price = model.Price,
+                CourseAuthor = "toCart",
                 CreatedAt = DateTime.UtcNow
             };
 
             _db.Courses.Add(course);
             _db.SaveChanges();
 
+            // Create course sections if any
             if (sections != null && sections.Count > 0)
             {
                 foreach (var section in sections)
@@ -120,9 +122,20 @@ namespace WebApplication1.Controllers
                 _db.SaveChanges();
             }
 
-            return Ok("Course and sections created successfully.");
-        }
+            // Retrieve the created course along with its sections if needed
+            var createdCourse = new
+            {
+                CourseId = course.CourseId,
+                Image = course.Image,
+                Description = course.CourseDescription,
+                Name = course.CourseName,
+                Title = course.CourseTitle,
+                Price = course.Price,
+                Sections = sections // Include sections if they are part of the response
+            };
 
+            return Ok(createdCourse); // Return course data as JSON for JavaScript to access
+        }
 
 
 
@@ -212,5 +225,41 @@ namespace WebApplication1.Controllers
         }
 
 
+
+        [HttpPut("updateCourseAuthor/{courseId}")]
+        public IActionResult UpdateCourseAuthor(int courseId)
+        {
+            // Retrieve the course by its ID
+            var course = _db.Courses.FirstOrDefault(c => c.CourseId == courseId);
+
+            // Check if course exists
+            if (course == null)
+            {
+                return NotFound("Course not found.");
+            }
+
+            // Update the CourseAuthor to "pending"
+            course.CourseAuthor = "pending";
+
+            // Save changes to the database
+            _db.SaveChanges();
+
+            return Ok(new
+            {
+                Message = "Course author updated successfully.",
+                CourseId = course.CourseId,
+                UpdatedAuthorStatus = course.CourseAuthor
+            });
+        }
+
+
+
+
+
     }
+
+
+
+
+
 }

@@ -2,14 +2,14 @@
 <html lang="en">
 
 	
-<!-- Mirrored from gambolthemes.net/html-items/cursus-new-demo/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 14 Sep 2024 14:17:24 GMT -->
+<!-- Mirrored from gambolthemes.net/html-items/cursus-new-demo/my_student_profile_view.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 14 Sep 2024 14:19:54 GMT -->
 <head>
-		<meta charset="utf-8">
+		<meta charset="utf-8">		
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, shrink-to-fit=9">
 		<meta name="description" content="Gambolthemes">
-		<meta name="author" content="Gambolthemes">		
-		<title>Cursus - Index</title>
+		<meta name="author" content="Gambolthemes">
+		<title>Cursus - My Student Profile View</title>
 		
 		<!-- Favicon Icon -->
 		<link rel="icon" type="image/png" href="../images/fav.png">
@@ -28,7 +28,7 @@
 		<link href="../vendor/OwlCarousel/assets/owl.theme.default.min.css" rel="stylesheet">
 		<link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 		<link href="../vendor/bootstrap-select/docs/docs/dist/css/bootstrap-select.min.css" rel="stylesheet">
-		<link rel="stylesheet" type="text/css" href="../vendor/semantic/semantic.min.css">	
+		<link rel="stylesheet" type="text/css" href="../vendor/semantic/semantic.min.css">
 		<style>
 						#firstProfile-image {
     width: 40px; /* Adjust as needed */
@@ -41,31 +41,28 @@
     height: 40px; /* Adjust as needed */
     border-radius: 50%; /* Makes the image round */
 }
-.fcrse_1 {
-    width: 100%; /* or a specific width e.g., 300px */
-    height: 400px; /* Fixed height */
-    overflow: hidden; /* Hide overflow */
-    position: relative; /* For absolute positioning of the overlay */
+
+
+
+
+
+			.card {
+    margin: 20px 0; /* Adds some space between cards */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
 
-.fcrse_img img {
-    width: 100%; /* Make the image fill the card */
-    height: 200px; /* Set a fixed height for images */
-    object-fit: cover; /* Ensure the image covers the area without distortion */
-    display: block; /* Remove bottom space under image */
+.card-body {
+    padding: 20px; /* Padding inside the card */
 }
 
-.fcrse_content {
-    height: calc(100% - 200px); /* Adjust content height based on image height */
-    padding: 10px; /* Add some padding */
-    box-sizing: border-box; /* Ensure padding doesn't affect total height */
+.name {
+    font-size: 24px; /* Larger font for the name */
+    margin-bottom: 10px; /* Space below the name */
 }
 
-
-
-		</style>
+		</style>	
 		
-	</head>
+	</head> 
 
 <body>
 	<!-- Header Start -->
@@ -85,10 +82,10 @@
 		<div class="header_right">
 			<ul>
 				<li>
-					<a href="Login/sign_up.html" class="upload_btn" title="Create New Course">Become an Instructor</a>
+					<a href="Login/sign_up.html" class="upload_btn" title="Create New Course">Create New Course</a>
 				</li>
 				<li>
-					<a href="cart/shopping_cart.html" class="option_links" title="cart"><i class='uil uil-shopping-cart-alt'></i><span class="noti_count">2</span></a>
+					<a href="cartPaymentInstructor/cart.html" class="option_links" title="cart"><i class='uil uil-shopping-cart-alt'></i><span class="noti_count">2</span></a>
 				</li>
 
 				<li class="profile-dropdown">
@@ -110,7 +107,7 @@
 								</div>							
 							</div>
 							
-							<a href="../Profile/my_student_profile_view.html" class="dp_link_12">View User Profile</a>						
+							<a href="profile.html" class="dp_link_12">View your Profile</a>						
 						</div>
 						<div class="night_mode_switch__btn">
 							<a href="#" id="night-mode" class="btn-night-mode">
@@ -133,29 +130,28 @@
 			<div class="left_section">
 				<ul>
 					<li class="menu--item">
-						<a href="../index.html" class="menu--link " title="Home">
+						<a href="../index.html" class="menu--link active" title="Home">
 							<i class='uil uil-home-alt menu--icon'></i>
 							<span class="menu--label">Home</span>
 						</a>
 					</li>
 					<li class="menu--item">
-						<a href="../courses.html" class="menu--link" title="Explore">
-							<i class='uil uil-search menu--icon'></i>
-							<span class="menu--label">Courses</span>
+						<a href="../create_new_course.html" class="menu--link" title="Create Course">
+							<i class='uil uil-plus-circle menu--icon'></i>
+							<span class="menu--label">Create Course</span>
 						</a>
 					</li>
+
 					<li class="menu--item">
-						<a href="myCourses.html" class="menu--link active" title="Saved Courses">
+						<a href="../beforeLogin/myCourses.html" class="menu--link" title="Saved Courses">
 						  <i class="uil uil-heart-alt menu--icon"></i>
 						  <span class="menu--label">My Courses</span>
 						</a>
 					</li>
-					<li class="menu--item">
-						<a href="../instructors/instructorsStudent.html" class="menu--link" title="Explore">
-							<i class='uil uil-search menu--icon'></i>
-							<span class="menu--label">Instructors</span>
-						</a>
-					</li>
+
+
+
+
 				</ul>
 			</div>
 
@@ -185,44 +181,121 @@
 	</nav>
 	<!-- Left Sidebar End -->
 	<!-- Body Start -->
-	<div class="wrapper">
-		<div class="sa4d25">
+	<div class="wrapper _bg4586">
+		<div class="_216b01">
 			<div class="container-fluid">			
-				<div class="row">
-					<div class="col-xl-12 col-lg-8">
-						<div class="section3125">
-							<div class="explore_search">
-								<div class="ui search focus">
-									<div class="ui left icon input swdh11">
-										<input class="prompt srch_explore" type="text" placeholder="Search for Tuts Videos, Tutors, Tests and more..">
-										<i class="uil uil-search-alt icon icon2"></i>
+				<div class="row justify-content-md-center">
+					<div class="col-md-12">
+						<div class="section3125 rpt145">							
+							<div class="row">						
+								<div class="col-lg-6">
+									<a href="#" class="_216b22">										
+										<span><i class="uil uil-cog"></i></span>Setting
+									</a>
+									<div class="dp_dt150">						
+										<div class="img148">
+											<img id="image" src="../images/left-imgs/img-1.jpg" alt="">										
+										</div>
+										<div class="prfledt1">
+											<h2 class="name">John Doe</h2>
+											<span class="debartement">Junior Graphic Developer</span>
+										</div>										
 									</div>
+
 								</div>
+								<div class="col-lg-6">
+									<a href="../Profile/setting.html" class="_216b12">										
+										<span><i class="uil uil-cog"></i></span>Setting
+									</a>
+									<div class="rgt-145">
+
+									</div>
+									<ul class="_bty149">
+										<li><button class="msg125 btn500" onclick="window.location.href = '../Profile/setting.html';">Edit</button></li>								
+									</ul>	
+								</div>													
 							</div>							
 						</div>							
-					</div>
-
-					<div class="col-md-12">
-						<div class="_14d25">
-							<div class="row" id="container">
-
-
-								
-								
-								
-								
-
-
-
-								
-
-				
-							</div>				
-						</div>				
-					</div>				
+					</div>															
 				</div>
 			</div>
 		</div>
+		<div class="_215b15">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-lg-12">						
+						<div class="course_tabs">
+							<nav>
+								<div class="nav nav-tabs tab_crse" id="nav-tab" role="tablist">
+									<a class="nav-item nav-link active" id="nav-about-tab" data-bs-toggle="tab" href="#nav-about" role="tab" aria-selected="true">About</a>
+									<!-- New link for Orders -->
+									<a class="nav-item nav-link" id="nav-orders-tab" data-bs-toggle="tab" href="#nav-orders" role="tab" aria-selected="false">My Orders</a>
+								</div>
+							</nav>						
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="_215b17">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="course_tab_content">
+							<div class="tab-content" id="nav-tabContent">
+								<!-- About Content -->
+								<div class="tab-pane fade show active" id="nav-about" role="tabpanel">
+									<div class="_htg451">
+										<div class="card">
+											<div class="card-body">
+												<h4 id="name" class="name">John Doe</h4> <!-- Placeholder for Name -->
+												<p><strong>Department:</strong> <span id="Department">Computer Science</span></p> <!-- Placeholder for Department -->
+												<p><strong>Email:</strong> <span id="email">example@example.com</span></p> <!-- Placeholder for Email -->
+												<p><strong>About Me:</strong></p>
+												<p class="about">Lorem ipsum dolor sit amet...</p> <!-- This will be replaced with actual about text -->
+											</div>
+										</div> <!-- End of card -->
+									</div>
+								</div>
+		
+<!-- New My Orders Content -->
+<div class="tab-pane fade" id="nav-orders" role="tabpanel">
+    <div class="_htg451">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="name">My Orders</h4>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Order ID</th>
+                                <th>Course Name</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                                <th>Date</th>
+                                <th>Payment Type</th>
+                            </tr>
+                        </thead>
+                        <tbody id="orders-list">
+                            <!-- Orders will be dynamically inserted here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div> <!-- End of card -->
+    </div>
+</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		
+		
 		<footer class="footer mt-30">
 			<div class="container">
 				<div class="row">
@@ -401,16 +474,14 @@
 	<script src="../js/jquery-3.7.1.min.js"></script>
 	<script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 	<script src="../vendor/OwlCarousel/owl.carousel.js"></script>
-	<script src="../vendor/semantic/semantic.min.js"></script>
 	<script src="../vendor/bootstrap-select/docs/docs/dist/js/bootstrap-select.js"></script>
-	<script src="../js/custom.js"></script>
-	<script src="../js/night-mode.js"></script>
-	<script src="indexBeforeLogin.js"></script>
-	<script src="myCourses.js"></script>
-	
-	
+	<script src="../vendor/semantic/semantic.min.js"></script>
+	<script src="../js/custom.js"></script>	
+	<script src="../js/night-mode.js"></script>	
+	<script src="my_student_profile_view.js"></script>
+	<script src="../index.js"></script>
 	
 </body>
 
-<!-- Mirrored from gambolthemes.net/html-items/cursus-new-demo/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 14 Sep 2024 14:17:59 GMT -->
+<!-- Mirrored from gambolthemes.net/html-items/cursus-new-demo/my_student_profile_view.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 14 Sep 2024 14:19:54 GMT -->
 </html>

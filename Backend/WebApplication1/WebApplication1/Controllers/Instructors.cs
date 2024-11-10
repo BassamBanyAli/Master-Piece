@@ -112,5 +112,30 @@ namespace WebApplication1.Controllers
         }
 
 
+
+
+
+
+
+
+
+
+        [HttpGet("getInstructorIdByEmail")]
+        public IActionResult GetInstructorIdByEmail(string email)
+        {
+            // Query the database to find the instructor by email
+            var instructor = _db.Instructors.FirstOrDefault(i => i.Email == email);
+
+            // Check if the instructor exists
+            if (instructor == null)
+            {
+                return NotFound("Instructor not found with the provided email.");
+            }
+
+            // Return the InstructorId
+            return Ok(new { InstructorId = instructor.InstructorId });
+        }
+
+
     }
 }

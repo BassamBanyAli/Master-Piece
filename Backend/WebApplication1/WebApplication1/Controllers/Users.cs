@@ -51,7 +51,6 @@ namespace WebApplication1.Controllers
         [HttpPost("login")]
         public IActionResult Login([FromForm] loginDTOs model)
         {
-
             // Regular email/password login
             var user = _db.Users.FirstOrDefault(x => x.Email == model.email);
             if (user == null || !PasswordHasher.VerifyPasswordHash(model.password, user.PasswordHash, user.PasswordSalt))
@@ -63,8 +62,34 @@ namespace WebApplication1.Controllers
             var roles = _db.Roles.Where(x => x.RoleId == user.RoleId).Select(ur => ur.RoleName).ToList();
             var token = _tokenGenerator.GenerateToken(user.FullName, roles);
 
-            return Ok(new { Token = token, userId = user.UserId });
+            // Check the user's RoleId to determine access level
+            string accessMessage;
+            switch (user.RoleId)
+            {
+                case 1:
+                    accessMessage = "Logged in successfully.";
+                    break;
+                case 2:
+                    accessMessage = "Super Admin access granted. Can access as an ordinary user.";
+                    break;
+                case 3:
+                    accessMessage = "Instructor access pending approval.";
+                    break;
+                case 4:
+                    accessMessage = "Accepted Instructor access granted.";
+                    break;
+                case 5:
+                    accessMessage = "Instructor access rejected.";
+                    break;
+                default:
+                    accessMessage = "Unknown role.";
+                    break;
+            }
+
+            // Return token and role-related information
+            return Ok(new { Token = token, userId = user.UserId, message = accessMessage,email=user.Email });
         }
+
 
 
         [HttpPost("Google")]

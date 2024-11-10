@@ -24,10 +24,6 @@ container.innerHTML='';
                                        </a>
                                        <div class="fcrse_content">
 
-                                           <div class="vdtodt">
-                                               <span class="vdt14">109k views</span>
-                                               <span class="vdt14">15 days ago</span>
-                                           </div>
                                            <a href="../mycourse/index.html" class="crse14s" onclick="handleCourseClick(${element.courseId})">${element.courseName}</a>
                                            <a href="../mycourse/index.html" class="crse-cate" onclick="handleCourseClick(${element.courseId})">${element.department}</a>
                                            <div class="auth1lnkprce">

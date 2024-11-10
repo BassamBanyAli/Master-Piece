@@ -49,7 +49,7 @@ async function featuredCources() {
         container.innerHTML += `	
         <div class="col-lg-3 col-md-4">
             <div class="fcrse_1 mt-30">
-                <a href="course_detail_view.html" class="fcrse_img" onclick="handleCourseClick(${element.courseId})">
+                <a href="courseDetail.html" class="fcrse_img" onclick="handleCourseClick(${element.courseId})">
                     <img src="https://localhost:7246/uploads/${element.image}" alt="">
                     <div class="course-overlay">
                         <span class="play_btn1"><i class="uil uil-play"></i></span>
@@ -57,8 +57,8 @@ async function featuredCources() {
                 </a>
                 <div class="fcrse_content">
 
-                    <a href="course_detail_view.html" class="crse14s" onclick="handleCourseClick(${element.courseId})">${element.courseName}</a>
-                    <a href="course_detail_view.html" class="crse-cate" onclick="handleCourseClick(${element.courseId})">${element.department}</a>
+                    <a href="courseDetail.html" class="crse14s" onclick="handleCourseClick(${element.courseId})">${element.courseName}</a>
+                    <a href="courseDetail.html" class="crse-cate" onclick="handleCourseClick(${element.courseId})">${element.department}</a>
                     <div class="auth1lnkprce">
                         <p class="cr1fot">By <a href="#">${element.courseAuthor}</a></p>
                     </div>
@@ -115,7 +115,7 @@ async function recentCourses() {
             container.innerHTML += `
                 <div class="col-lg-3 col-md-4">
                     <div class="fcrse_1 mt-30">
-                        <a href="course_detail_view.html" class="fcrse_img" onclick="handleCourseClick(${element.courseId})">
+                        <a href="courseDetail.html" class="fcrse_img" onclick="handleCourseClick(${element.courseId})">
                             <img src="https://localhost:7246/uploads/${element.image}" alt="">
                             <div class="course-overlay">
                                 <span class="play_btn1"><i class="uil uil-play"></i></span>
@@ -123,8 +123,8 @@ async function recentCourses() {
                         </a>
                         <div class="fcrse_content">
 
-                            <a href="course_detail_view.html" class="crse14s" onclick="handleCourseClick(${element.courseId})">${element.courseName}</a>
-                            <a href="course_detail_view.html" class="crse-cate" onclick="handleCourseClick(${element.courseId})">${element.department}</a>
+                            <a href="courseDetail.html" class="crse14s" onclick="handleCourseClick(${element.courseId})">${element.courseName}</a>
+                            <a href="courseDetail.html" class="crse-cate" onclick="handleCourseClick(${element.courseId})">${element.department}</a>
                             <div class="auth1lnkprce">
                                 <p class="cr1fot">By <a href="#">${element.courseAuthor}</a></p>
                             </div>

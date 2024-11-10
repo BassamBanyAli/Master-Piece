@@ -11,7 +11,7 @@ async function explore() {
         container.innerHTML += `
             <div class="col-lg-3 col-md-4">
                 <div class="fcrse_1 mt-30">
-                    <a href="course_detail_view.html" class="fcrse_img" onclick="handleCourseClick(${element.courseId})">
+                    <a href="courseDetail.html" class="fcrse_img" onclick="handleCourseClick(${element.courseId})">
                         <img src="https://localhost:7246/uploads/${element.image}" alt="">
                         <div class="course-overlay">
                             <span class="play_btn1"><i class="uil uil-play"></i></span>
@@ -19,8 +19,8 @@ async function explore() {
                     </a>
                     <div class="fcrse_content">
 
-                        <a id="courseName" href="course_detail_view.html" class="crse14s" onclick="handleCourseClick(${element.courseId})">${element.courseName}</a>
-                        <a id="courseDebartment" href="course_detail_view.html" class="crse-cate" onclick="handleCourseClick(${element.courseId})">${element.department}</a>
+                        <a id="courseName" href="courseDetail.html" class="crse14s" onclick="handleCourseClick(${element.courseId})">${element.courseName}</a>
+                        <a id="courseDebartment" href="courseDetail.html" class="crse-cate" onclick="handleCourseClick(${element.courseId})">${element.department}</a>
                         <div class="auth1lnkprce">
                             <p class="cr1fot">By <a href="#">${element.courseAuthor}</a></p>
                             <div id="coursePrice" class="prce142">$${element.price}</div>
@@ -56,7 +56,7 @@ async function searchCourses(query) {
             container.innerHTML += `
             <div class="col-lg-3 col-md-4">
                 <div class="fcrse_1 mt-30">
-                    <a href="course_detail_view.html" class="fcrse_img" onclick="handleCourseClick(${element.courseId})">
+                    <a href="courseDetail.html" class="fcrse_img" onclick="handleCourseClick(${element.courseId})">
                         <img src="https://localhost:7246/uploads/${element.image}" alt="">
                         <div class="course-overlay">
                             <span class="play_btn1"><i class="uil uil-play"></i></span>
@@ -64,8 +64,8 @@ async function searchCourses(query) {
                     </a>
                     <div class="fcrse_content">
 
-                        <a href="course_detail_view.html" class="crse14s" onclick="handleCourseClick(${element.courseId})">${element.courseName}</a>
-                        <a href="course_detail_view.html" class="crse-cate" onclick="handleCourseClick(${element.courseId})">${element.department}</a>
+                        <a href="courseDetail.html" class="crse14s" onclick="handleCourseClick(${element.courseId})">${element.courseName}</a>
+                        <a href="courseDetail.html" class="crse-cate" onclick="handleCourseClick(${element.courseId})">${element.department}</a>
                         <div class="auth1lnkprce">
                             <p class="cr1fot">By <a href="#">${element.courseAuthor}</a></p>
                             <div class="prce142">$${element.price}</div>
@@ -107,7 +107,7 @@ function handleCourseClick(element) {
 	debugger;
     var courseId = element;
     localStorage.setItem('courseId', courseId);
-    window.location.href = 'course_detail_view.html';
+    window.location.href = 'courseDetail.html';
 }
 
 
@@ -177,7 +177,7 @@ async function fetchCoursesByCategory(departmentName) {
             container.innerHTML += `
          <div class="col-lg-3 col-md-4">
                 <div class="fcrse_1 mt-30">
-                    <a href="course_detail_view.html" class="fcrse_img" onclick="handleCourseClick(${element.courseId})">
+                    <a href="courseDetail.html" class="fcrse_img" onclick="handleCourseClick(${element.courseId})">
                         <img src="https://localhost:7246/uploads/${element.image}" alt="">
                         <div class="course-overlay">
                             <span class="play_btn1"><i class="uil uil-play"></i></span>
@@ -185,8 +185,8 @@ async function fetchCoursesByCategory(departmentName) {
                     </a>
                     <div class="fcrse_content">
 
-                        <a href="course_detail_view.html" class="crse14s" onclick="handleCourseClick(${element.courseId})">${element.courseName}</a>
-                        <a href="course_detail_view.html" class="crse-cate" onclick="handleCourseClick(${element.courseId})">${element.department}</a>
+                        <a href="courseDetail.html" class="crse14s" onclick="handleCourseClick(${element.courseId})">${element.courseName}</a>
+                        <a href="courseDetail.html" class="crse-cate" onclick="handleCourseClick(${element.courseId})">${element.department}</a>
                         <div class="auth1lnkprce">
                             <p class="cr1fot">By <a href="#">${element.courseAuthor}</a></p>
                             <div class="prce142">$${element.price}</div>

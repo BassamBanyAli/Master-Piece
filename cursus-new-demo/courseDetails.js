@@ -59,22 +59,46 @@ async function course_details() {
         // Parse the JSON response
         const result = await response.json();
 
+        localStorage.setItem("courseAuth",result.courseAuthor);
+
         // Get the elements where data will be displayed
         const description = document.getElementById("description");
         const name = document.getElementById("courseName");
         const title = document.getElementById("courseTitle");
+        const department = document.getElementById("department");
         const price = document.getElementById("coursePrice");
+        const date = document.getElementById("date");
         const videoPlayer = document.getElementById("videoPlayer");
         const image = document.getElementById("image");
+
+
+localStorage.setItem("instructorId",result.instructorId);
+        var messageButton = document.createElement("button");
+        messageButton.className = "subscribe-btn btn500";
+        messageButton.textContent = "View Instructor Profile";
+        messageButton.onclick = function () {
+            window.location.href = "instructor_profile_viewLogin.html";
+        };
+        
+        document.getElementById("messageButtonContainer").appendChild(messageButton);
+
+
+
+        // Convert createdAt to Date object and format it
+        const createdAtDate = new Date(result.createdAt); // Convert string to Date object
+        const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+        const formattedDate = createdAtDate.toLocaleDateString('en-US', options); // Format date
 
         // Set the content with data from the result
         description.innerHTML = result.courseDescription || 'No description available';
         name.innerHTML = result.courseName || 'No name available';
         title.innerHTML = result.courseTitle || 'No title available';
+        department.innerHTML = result.department || 'No department available';
         price.innerHTML = "Price is $" + result.price || 'No price available';
+        date.innerHTML = formattedDate; // Display formatted date
         videoPlayer.src = result.tutorialVideo;
         image.src = `https://localhost:7246/uploads/${result.image}`; // Use result.image
-        localStorage.setItem("image",result.image);
+        localStorage.setItem("image", result.image);
 
     } catch (error) {
         console.error('Error fetching course details:', error);
@@ -87,6 +111,8 @@ course_details();
 
 
 
+
+
 async function saveInLocalStorage() {
     const courseId = localStorage.getItem("courseId");
     // Get the content or values of the elements
@@ -95,6 +121,7 @@ async function saveInLocalStorage() {
     const title = document.getElementById("courseTitle").innerText;
     const price = document.getElementById("coursePrice").innerText;
     const image=localStorage.getItem("image");
+    const courseAuth=localStorage.getItem("courseAuth");
 
     // Create a new course object
     const newCourseData = {
@@ -103,7 +130,8 @@ async function saveInLocalStorage() {
         description,
         name,
         title,
-        price
+        price,
+        courseAuth
     };
 
     // Retrieve existing array from localStorage or initialize an empty array
