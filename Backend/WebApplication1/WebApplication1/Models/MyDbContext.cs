@@ -27,6 +27,8 @@ public partial class MyDbContext : DbContext
 
     public virtual DbSet<InstructorPayment> InstructorPayments { get; set; }
 
+    public virtual DbSet<RevenueDetail> RevenueDetails { get; set; }
+
     public virtual DbSet<Role> Roles { get; set; }
 
     public virtual DbSet<Student> Students { get; set; }
@@ -151,6 +153,28 @@ public partial class MyDbContext : DbContext
                 .HasForeignKey(d => d.InstructorId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__Instructo__Instr__1C873BEC");
+        });
+
+        modelBuilder.Entity<RevenueDetail>(entity =>
+        {
+            entity.HasKey(e => e.RevenueId).HasName("PK__RevenueD__275F16DDA2D72C0A");
+
+            entity.Property(e => e.AdminEarnings).HasColumnType("decimal(10, 2)");
+            entity.Property(e => e.InstructorEarnings).HasColumnType("decimal(10, 2)");
+            entity.Property(e => e.PaymentDate)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.TotalAmount).HasColumnType("decimal(10, 2)");
+
+            entity.HasOne(d => d.Course).WithMany(p => p.RevenueDetails)
+                .HasForeignKey(d => d.CourseId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__RevenueDe__Cours__345EC57D");
+
+            entity.HasOne(d => d.Instructor).WithMany(p => p.RevenueDetails)
+                .HasForeignKey(d => d.InstructorId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__RevenueDe__Instr__3552E9B6");
         });
 
         modelBuilder.Entity<Role>(entity =>

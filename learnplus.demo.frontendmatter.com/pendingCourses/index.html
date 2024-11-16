@@ -184,22 +184,29 @@
                                 </button>
                             </div>
                             
-                            <table class="table mb-0">
-                                <thead>
-                                    <tr>
-                                        <th>Full Name</th>
-                                        <th style="width: 200px;">Email</th>
-                                        <th style="width: 150px;">Department</th>
+<!-- Container for the "No courses" message -->
+<div id="noCoursesMessage" style="display: none; padding: 20px; background-color: #f8d7da; border: 1px solid #f5c6cb; border-radius: 5px; color: #721c24; text-align: center;">
+    <strong>No pending courses at the moment.</strong>
+</div>
 
-                                        <th style="width: 150px;">Enrolled Date</th>
-                                        <th style="width: 150px;">grade</th>
-                                        <th style="width: 24px;"></th>
-                                    </tr>
-                                </thead>
-                                <tbody class="list" id="studentList">
-                                    <!-- Dynamic content will be inserted here by JavaScript -->
-                                </tbody>
-                            </table>
+<!-- Table for displaying courses -->
+<table class="table mb-0">
+    <thead>
+        <tr>
+            <th style="width: 300px;">Course Name</th>
+            <th style="width: 300px;">Description</th>
+            <th style="width: 200px;">Department</th>
+            <th style="width: 100px;">Price ($)</th>
+            <th style="width: 150px;">Created At</th>
+            <th style="width: 200px;">Instructor Name</th>
+            <th style="width: 150px;">Actions</th>
+        </tr>
+    </thead>
+    <tbody class="list" id="studentList">
+        <!-- Dynamic content will be inserted here by JavaScript -->
+    </tbody>
+</table>
+
                             
                             
 
@@ -229,7 +236,7 @@
                                         </li>
                                         <li class="sidebar-menu-item ">
                                             <a class="sidebar-menu-button"
-                                               href="instructors.html">
+                                               href="../instructors/instructors.html">
                                                 <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">school</i> Instructor
                                             </a>
                                         </li>
@@ -239,16 +246,22 @@
                                                 <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">search</i> Browse Courses
                                             </a>
                                         </li>
-                                        <li class="sidebar-menu-item">
+                                        <li class="sidebar-menu-item active">
                                             <a class="sidebar-menu-button"
-                                               href="../pendingCourses/index.html">
+                                               href="index.html">
                                                 <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">search</i> Pending Courses
                                             </a>
                                         </li>
-                                        <li class="sidebar-menu-item active">
+                                        <li class="sidebar-menu-item">
                                             <a class="sidebar-menu-button"
                                                href="/pendingInstructor/instructor.html">
                                                 <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">search</i> Pending Instructors
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-menu-item">
+                                            <a class="sidebar-menu-button"
+                                               href="../Course Financial Details/index.html">
+                                                <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">comment</i>Course Financial Details
                                             </a>
                                         </li>
                                         <li class="sidebar-menu-item">
@@ -388,7 +401,7 @@
         <script src="../assets/js/page.student-dashboard.js"></script>
         <script src="checkLogin.js"></script>
         <script src="students.js"></script>
-        <script src="instructor.js"></script>
+        <script src="index.js"></script>
 
     </body>
 

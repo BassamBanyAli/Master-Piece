@@ -254,6 +254,129 @@ namespace WebApplication1.Controllers
 
 
 
+        [HttpGet("pending/{id}")]
+        public IActionResult GetCoursesByAuthorAndInstructor(int id)
+        {
+            // Fetch courses where CourseAuthor is "pending" and InstructorId matches the provided ID
+            var courses = _db.Courses
+                                  .Where(c => c.CourseAuthor == "pending" && c.InstructorId == id)
+                                  .ToList();
+
+            if (courses == null || !courses.Any())
+            {
+                return NotFound(new { message = "No courses found with 'pending' author and the specified instructor ID." });
+            }
+
+            return Ok(courses);
+        }
+
+
+        [HttpGet("GetPendingCourses")]
+        public IActionResult GetPendingCourses()
+        {
+            // Retrieve all courses with CourseAuthor = "pending" and include instructor name
+            var pendingCourses = _db.Courses
+                .Where(course => course.CourseAuthor == "pending")
+                .Include(course => course.Instructor) // Include related instructor
+                .Select(course => new
+                {
+                    course.CourseId,
+                    course.CourseName,
+                    course.CourseDescription,
+                    course.Department,
+                    course.Price,
+                    course.CreatedAt,
+                    InstructorName = course.Instructor != null ? course.Instructor.FullName : "N/A" // Instructor name
+                })
+                .ToList();
+
+            if (!pendingCourses.Any())
+            {
+                return NotFound(new { message = "No courses with CourseAuthor 'pending' found." });
+            }
+
+            return Ok(pendingCourses);
+        }
+
+        [HttpPut("acceptedCourse/{courseId}")]
+        public IActionResult acceptedCourse(int courseId)
+        {
+            // Find the course by ID and check if its CourseAuthor is "pending"
+            var course = _db.Courses.FirstOrDefault(c => c.CourseId == courseId && c.CourseAuthor == "pending");
+
+            if (course == null)
+            {
+                return NotFound(new { message = $"No course with ID {courseId} and CourseAuthor 'pending' found." });
+            }
+
+            // Retrieve the related instructor using InstructorId
+            var instructor = _db.Instructors.FirstOrDefault(i => i.InstructorId == course.InstructorId);
+
+            if (instructor == null)
+            {
+                return NotFound(new { message = $"No instructor found for the course with ID {courseId}." });
+            }
+
+            // Update the CourseAuthor to the instructor's full name
+            course.CourseAuthor = instructor.FullName;
+
+            // Save changes to the database
+            _db.SaveChanges();
+
+            return Ok(new { message = $"CourseAuthor for course ID {courseId} updated to '{instructor.FullName}'." });
+        }
+
+
+        [HttpPut("RejectCourse/{courseId}")]
+        public IActionResult RejectCourse(int courseId)
+        {
+            // Find the course by ID and check if its CourseAuthor is "pending"
+            var course = _db.Courses.FirstOrDefault(c => c.CourseId == courseId && c.CourseAuthor == "pending");
+
+            if (course == null)
+            {
+                return NotFound(new { message = $"No course with ID {courseId} and CourseAuthor 'pending' found." });
+            }
+
+            // Update the CourseAuthor to "rejected"
+            course.CourseAuthor = "rejected";
+
+            // Save changes to the database
+            _db.SaveChanges();
+
+            return Ok(new { message = $"Course ID {courseId} has been rejected." });
+        }
+
+
+        [HttpGet("getCourseForInstructor")]
+        public IActionResult GetCourseForInstructor(int id)
+        {
+            var instructor = _db.Instructors.AsNoTracking().FirstOrDefault(i => i.InstructorId == id);
+
+            if (instructor == null)
+            {
+                return NotFound(new { message = $"Instructor with ID {id} not found." });
+            }
+
+            var courses = _db.Courses
+                .AsNoTracking() // Avoid EF Core tracking and loading full relations
+                .Where(c => c.InstructorId == id && c.CourseAuthor == instructor.FullName)
+                .ToList();
+
+            if (!courses.Any())
+            {
+                return NotFound(new { message = $"No courses found for Instructor with ID {id} and matching CourseAuthor." });
+            }
+
+            return Ok(courses); // Cycles avoided due to no EF tracking.
+        }
+
+
+
+
+
+
+
 
 
     }

@@ -225,43 +225,48 @@ namespace WebApplication1.Controllers
                 return NotFound("User not found");
             }
 
-            // Update only non-null and non-empty values
+            // Update image only if a new one is provided; treat empty string as null
+            if (request.Image != null && request.Image.Length > 0)
+            {
+                string imageFileName = SaveImage1(request.Image);
+                user.Image = imageFileName;
+            }
+
+            // Update only non-null and non-empty values for other fields
             if (!string.IsNullOrEmpty(request.fullName))
             {
-                user.FullName = request.fullName; // Update if provided
+                user.FullName = request.fullName;
             }
 
             if (!string.IsNullOrEmpty(request.Debartement))
             {
-                user.Debartement = request.Debartement; // Update if provided
+                user.Debartement = request.Debartement;
             }
 
             if (!string.IsNullOrEmpty(request.About))
             {
-                user.About = request.About; // Update if provided
+                user.About = request.About;
             }
 
             // Update password only if old password is correct and new password is provided
             if (!string.IsNullOrEmpty(request.oldPassword) && !string.IsNullOrEmpty(request.password))
             {
-                // Validate the old password
                 if (!PasswordHasher.VerifyPasswordHash(request.oldPassword, user.PasswordHash, user.PasswordSalt))
                 {
                     return BadRequest("Old password is incorrect.");
                 }
 
-                // Hash and set the new password
-                byte[] passwordHash, passwordSalt;
-                PasswordHasher.CreatePasswordHash(request.password, out passwordHash, out passwordSalt);
+                PasswordHasher.CreatePasswordHash(request.password, out byte[] passwordHash, out byte[] passwordSalt);
                 user.PasswordHash = passwordHash;
                 user.PasswordSalt = passwordSalt;
-                user.Password = request.password; // Update password if provided
+                user.Password = request.password;
             }
 
             // Save changes to the database
             _db.SaveChanges();
             return Ok(user); // Return updated user information
         }
+
 
 
 
@@ -333,6 +338,11 @@ namespace WebApplication1.Controllers
             return Ok(User);
 
         }
+
+
+
+
+
 
 
         [HttpPost("contactUS")]

@@ -1,22 +1,22 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 	
-<!-- Mirrored from gambolthemes.net/html-items/cursus-new-demo/setting.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 14 Sep 2024 14:19:20 GMT -->
+<!-- Mirrored from gambolthemes.net/html-items/cursus-new-demo/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 14 Sep 2024 14:17:24 GMT -->
 <head>
-		<meta charset="utf-8">	
+		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, shrink-to-fit=9">
 		<meta name="description" content="Gambolthemes">
 		<meta name="author" content="Gambolthemes">		
-		<title>Cursus - Setting</title>
+		<title>Cursus - Index</title>
 		
 		<!-- Favicon Icon -->
 		<link rel="icon" type="image/png" href="../images/fav.png">
 		
 		<!-- Stylesheets -->
 		<link href='http://fonts.googleapis.com/css?family=Roboto:400,700,500' rel='stylesheet'>
-		<link href='vendor/unicons-2.0.1/css/unicons.css' rel='stylesheet'>
+		<link href='../vendor/unicons-2.0.1/css/unicons.css' rel='stylesheet'>
 		<link href="../css/vertical-responsive-menu.min.css" rel="stylesheet">
 		<link href="../css/style.css" rel="stylesheet">
 		<link href="../css/responsive.css" rel="stylesheet">
@@ -28,14 +28,9 @@
 		<link href="../vendor/OwlCarousel/assets/owl.theme.default.min.css" rel="stylesheet">
 		<link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 		<link href="../vendor/bootstrap-select/docs/docs/dist/css/bootstrap-select.min.css" rel="stylesheet">
-		<link rel="stylesheet" type="text/css" href="../vendor/semantic/semantic.min.css">
+		<link rel="stylesheet" type="text/css" href="../vendor/semantic/semantic.min.css">	
 		<style>
-			#image {
-    width: 100px;  /* Set the desired width */
-    height: 100px; /* Set the desired height */
-    object-fit: cover; /* Ensures the image scales properly within the circle */
-}
-#firstProfile-image {
+						#firstProfile-image {
     width: 40px; /* Adjust as needed */
     height: 40px; /* Adjust as needed */
     border-radius: 50%; /* Makes the image round */
@@ -46,8 +41,68 @@
     height: 40px; /* Adjust as needed */
     border-radius: 50%; /* Makes the image round */
 }
+.fcrse_1 {
+    width: 100%; /* or a specific width e.g., 300px */
+    height: 400px; /* Fixed height */
+    overflow: hidden; /* Hide overflow */
+    position: relative; /* For absolute positioning of the overlay */
+}
 
-		</style>		
+.fcrse_img img {
+    width: 100%; /* Make the image fill the card */
+    height: 200px; /* Set a fixed height for images */
+    object-fit: cover; /* Ensure the image covers the area without distortion */
+    display: block; /* Remove bottom space under image */
+}
+
+.fcrse_content {
+    height: calc(100% - 200px); /* Adjust content height based on image height */
+    padding: 10px; /* Add some padding */
+    box-sizing: border-box; /* Ensure padding doesn't affect total height */
+}
+
+
+
+
+
+
+
+
+/* Alert box styling for 'No Pending Courses Found' */
+.alert-box {
+    background-color: #f8d7da; /* Soft red background */
+    color: #721c24; /* Dark red text color */
+    border: 1px solid #f5c6cb; /* Border matching the background */
+    border-radius: 8px; /* Rounded corners */
+    padding: 20px;
+    margin-top: 20px;
+    max-width: 500px;
+    margin: 20px auto;
+    text-align: center;
+}
+
+.alert-box p {
+    margin: 10px 0;
+}
+
+.alert-box strong {
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+.alert-box a {
+    color: #004085; /* Blue link color */
+    text-decoration: none;
+}
+
+.alert-box a:hover {
+    text-decoration: underline;
+}
+
+
+
+
+		</style>
 		
 	</head>
 
@@ -62,32 +117,27 @@
 			<span class="collapse_menu--label"></span>
 		</button>
 		<div class="main_logo" id="logo">
-			<a href="../index.html"><img src="../images/logo.svg" alt=""></a>
-			<a href="../index.html"><img class="logo-inverse" src="../images/ct_logo.svg" alt=""></a>
+			<a href="index.html"><img src="images/logo.svg" alt=""></a>
+			<a href="index.html"><img class="logo-inverse" src="images/ct_logo.svg" alt=""></a>
 		</div>
-		<div class="search120">
-			<div class="ui search">
-			  <div class="ui left icon input swdh10">
-				<input class="prompt srch10" type="text" placeholder="Search for Tuts Videos, Tutors, Tests and more..">
-				<i class='uil uil-search-alt icon icon1'></i>
-			  </div>
-			</div>
-		</div>
+
 		<div class="header_right">
 			<ul>
 				<li>
-					<a href="../create_new_course.html" class="upload_btn" title="Create New Course">Create New Course</a>
+					<a href="Login/sign_up.html" class="upload_btn" title="Create New Course">Become an Instructor</a>
 				</li>
-				
+				<li>
+					<a href="cart/shopping_cart.html" class="option_links" title="cart"><i class='uil uil-shopping-cart-alt'></i><span class="noti_count">2</span></a>
+				</li>
 
 				<li class="profile-dropdown">
 					<a href="#" class="opts_account" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
-						<img id="firstProfile-image" src="../images/hd_dp.jpg" alt="">
+						<img id="firstProfile-image" src="images/hd_dp.jpg" alt="">
 					</a>
 					<div class="dropdown-menu dropdown_account drop-down dropdown-menu-end">
 						<div class="channel_my">
 							<div class="profile_link">
-								<img id="profile-image" src="../images/hd_dp.jpg" alt="Profile Image">
+								<img id="profile-image" src="images/hd_dp.jpg" alt="Profile Image">
 								<div class="pd_content">
 									<div class="rhte85">
 										<h6 id="profile-name">Joginder Singh</h6>
@@ -99,7 +149,7 @@
 								</div>							
 							</div>
 							
-							<a href="../Profile/my_student_profile_view.html" class="dp_link_12">View Instructor Profile</a>						
+							<a href="../Profile/my_student_profile_view.html" class="dp_link_12">View User Profile</a>						
 						</div>
 						<div class="night_mode_switch__btn">
 							<a href="#" id="night-mode" class="btn-night-mode">
@@ -109,7 +159,7 @@
 								</span>
 							</a>
 						</div>
-						<a href="../sign_in.html" class="item channel_item">Sign Out</a>
+						<a href="Login/sign_in.html" class="item channel_item" onclick="signOut()">Sign Out</a>
 					</div>
 				</li>
 			</ul>
@@ -122,19 +172,26 @@
 			<div class="left_section">
 				<ul>
 					<li class="menu--item">
-						<a href="../index.html" class="menu--link active" title="Home">
+						<a href="index.html" class="menu--link" title="Home">
 							<i class='uil uil-home-alt menu--icon'></i>
 							<span class="menu--label">Home</span>
 						</a>
 					</li>
 					<li class="menu--item">
-						<a href="../beforeLogin/explore.html" class="menu--link" title="Explore">
-							<i class='uil uil-search menu--icon'></i>
-							<span class="menu--label">Courses</span>
+						<a href="../create_new_course.html" class="menu--link" title="Create Course">
+							<i class='uil uil-plus-circle menu--icon'></i>
+							<span class="menu--label">Create Course</span>
 						</a>
 					</li>
 					<li class="menu--item">
-						<a href="../beforeLogin/myCourses.html" class="menu--link" title="Saved Courses">
+						<a href="index.html" class="menu--link active" title="Saved Courses">
+						  <i class='uil uil-comment-alt-exclamation menu--icon'></i>
+						  <span class="menu--label">Pending Courses</span>
+						</a>
+					</li>
+
+					<li class="menu--item">
+						<a href="../coursesInstructor/index.html" class="menu--link" title="Saved Courses">
 						  <i class="uil uil-heart-alt menu--icon"></i>
 						  <span class="menu--label">My Courses</span>
 						</a>
@@ -142,22 +199,7 @@
 
 
 
-					<li class="menu--item  menu--item__has_sub_menu">
-						<label class="menu--link" title="Pages">
-						  <i class='uil uil-file menu--icon'></i>
-						  <span class="menu--label">Pages</span>
-						</label>
-						<ul class="sub_menu">
-							<li class="sub_menu--item">
-								<a href="../Login/sign_in.html" class="sub_menu--link">Sign In</a>
-							</li>
-							<li class="sub_menu--item">
-								<a href="../Login/sign_up.html" class="sub_menu--link">Sign Up</a>
-							</li>
-					
-			
-						</ul>
-					</li>
+
 				</ul>
 			</div>
 
@@ -189,116 +231,35 @@
 	<!-- Body Start -->
 	<div class="wrapper">
 		<div class="sa4d25">
-			<div class="container-fluid">            
+			<div class="container-fluid">			
 				<div class="row">
-					<div class="col-lg-12">
-						<h2 class="st_title"><i class='uil uil-cog'></i> Setting</h2>
-						<div class="setting_tabs">
-							<ul class="nav nav-pills mb-4" id="pills-tab" role="tablist">
-								<li class="nav-item">
-									<a class="nav-link active" id="pills-account-tab" data-bs-toggle="pill" href="#pills-account" role="tab" aria-selected="true">Account</a>
-								</li>
-							</ul>
-						</div>
-						<div class="tab-content" id="pills-tabContent">
-							<div class="tab-pane fade show active" id="pills-account" role="tabpanel" aria-labelledby="pills-account-tab">
-								<div class="account_setting">
-									<h4>Your Cursus Account</h4>
-									<p>This is your public presence on Cursus. You need an account to upload your paid courses, comment on courses, purchased by students, or earning.</p>
-									
-									<!-- Flex container to align form and image -->
-									<div class="d-flex align-items-start">
-										<!-- Left: Profile Image -->
-										<div class="img148 me-4">
-											<!-- Make the image clickable to open the file input -->
-											<label for="profileImageInput" style="cursor: pointer;">
-												<img id="image" src="../images/left-imgs/img-1.jpg" alt="Profile Image" class="img-fluid" />
-											</label>
-											<!-- File input (hidden) -->
-											<input type="file" id="profileImageInput" style="display: none;" onchange="previewImage(event)" />
-										</div>
-										
-										<!-- Right: Form Section -->
-										<div class="basic_profile flex-grow-1">
-											<div class="basic_ptitle">
-												<h4>Basic Profile</h4>
-												<p>Add information about yourself</p>
-											</div>
-											<form id="form" onsubmit="setting(event)">
-												<div class="basic_form">
-													<div class="row">
-														<div class="col-lg-8">
-															<div class="row">
-																<div class="col-lg-6">
-																	<div class="ui search focus mt-30">
-																		<div class="ui left icon input swdh11 swdh19">
-																			<input class="prompt srch_explore" type="text" name="FullName" value="" id="id[name]" maxlength="64" placeholder="Full Name">                                                            
-																		</div>
-																	</div>
-																</div>
-																<div class="col-lg-12">
-																	<div class="ui search focus mt-30">
-																		<div class="ui left icon input swdh11 swdh19">
-																			<input class="prompt srch_explore" type="text" name="Debartement" value="I am a Web Designer" id="id_headline" required="" maxlength="60" placeholder="Department">
-																		</div>
-																		<div class="help-block">Enter your department, such as "Marketing Department," "Engineering Department," or "Finance."</div>
-																	</div>
-																</div>
-																<div class="col-lg-12">
-																	<div class="ui search focus mt-30">
-																		<div class="ui form swdh30">
-																			<div class="field">
-																				<textarea rows="3" name="About" id="id_about" placeholder="Write a little description about you..."></textarea>
-																			</div>
-																		</div>
-																		<div class="help-block">Links and coupon codes are not permitted in this section.</div>
-																	</div>
-																</div>
-																
-																<!-- New section for password editing -->
-																<div class="col-lg-12">
-																	<div class="basic_ptitle mt-30">
-																		<h4>Password Settings</h4>
-																	</div>
-																	<div class="ui search focus mt-30">
-																		<div class="ui left icon input swdh11 swdh19">
-																			<input class="prompt srch_explore" type="password" name="oldPassword" id="id_old_password" maxlength="64" placeholder="Old Password">
-																		</div>
-																	</div>
-																	<div class="ui search focus mt-30">
-																		<div class="ui left icon input swdh11 swdh19">
-																			<input class="prompt srch_explore" type="password" name="password" id="id_new_password" maxlength="64" placeholder="New Password">
-																		</div>
-																	</div>
-																	<div class="ui search focus mt-30">
-																		<div class="ui left icon input swdh11 swdh19">
-																			<input class="prompt srch_explore" type="password" name="ConfirmPassword" id="id_confirm_password" maxlength="64" placeholder="Confirm New Password">
-																		</div>
-																	</div>
-																	<div class="help-block">Make sure your new password is at least 8 characters long.</div>
-																</div>
-																
-																<div class="col-lg-12">
-																	<div class="divider-1"></div>
-																</div>
-															</div>
-														</div>
-													</div>
-												</div>
-												<button class="save_btn" type="submit">Save Changes</button>
-											</form>
-										</div>
-									</div>
-									
-								</div>
-							</div>
-						</div>
-						
-					</div>                        
+					<div class="col-xl-12 col-lg-8">
+						<div class="section3125">
+							
+						</div>							
+					</div>
+
+					<div class="col-md-12">
+						<div class="_14d25">
+							<div class="row" id="container">
+
+
+								
+								
+								
+								
+
+
+
+								
+
+				
+							</div>				
+						</div>				
+					</div>				
 				</div>
 			</div>
 		</div>
-		
 		<footer class="footer mt-30">
 			<div class="container">
 				<div class="row">
@@ -328,10 +289,10 @@
 					</div>
 					<div class="col-lg-3 col-md-3 col-sm-6">
 						<div class="item_f3">
-							<a href="../#" class="btn1542">Teach on Cursus</a>
+							<a href="#" class="btn1542">Teach on Cursus</a>
 							<div class="lng_btn">
 								<div class="ui language bottom right pointing dropdown floating" id="languages" data-content="Select Language">
-									<a href="../#"><i class='uil uil-globe lft'></i>Language<i class='uil uil-angle-down rgt'></i></a>
+									<a href="#"><i class='uil uil-globe lft'></i>Language<i class='uil uil-angle-down rgt'></i></a>
 									<div class="menu">
 										<div class="scrolling menu">
 											<div class="item" data-percent="100" data-value="en" data-english="English">
@@ -455,13 +416,13 @@
 								</div>
 								<div class="col-md-6">
 									<div class="edu_social_links">
-										<a href="../#"><i class="fab fa-facebook-f"></i></a>
-										<a href="../#"><i class="fab fa-twitter"></i></a>
-										<a href="../#"><i class="fab fa-google-plus-g"></i></a>
-										<a href="../#"><i class="fab fa-linkedin-in"></i></a>
-										<a href="../#"><i class="fab fa-instagram"></i></a>
-										<a href="../#"><i class="fab fa-youtube"></i></a>
-										<a href="../#"><i class="fab fa-pinterest-p"></i></a>
+										<a href="#"><i class="fab fa-facebook-f"></i></a>
+										<a href="#"><i class="fab fa-twitter"></i></a>
+										<a href="#"><i class="fab fa-google-plus-g"></i></a>
+										<a href="#"><i class="fab fa-linkedin-in"></i></a>
+										<a href="#"><i class="fab fa-instagram"></i></a>
+										<a href="#"><i class="fab fa-youtube"></i></a>
+										<a href="#"><i class="fab fa-pinterest-p"></i></a>
 									</div>
 								</div>		
 							</div>
@@ -481,10 +442,12 @@
 	<script src="../vendor/bootstrap-select/docs/docs/dist/js/bootstrap-select.js"></script>
 	<script src="../js/custom.js"></script>
 	<script src="../js/night-mode.js"></script>
-	<script src="setting.js"></script>
-	<script src="../index.js"></script>
+	<script src="indexBeforeLogin.js"></script>
+	<script src="index.js"></script>
+	
+	
 	
 </body>
 
-<!-- Mirrored from gambolthemes.net/html-items/cursus-new-demo/setting.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 14 Sep 2024 14:19:20 GMT -->
+<!-- Mirrored from gambolthemes.net/html-items/cursus-new-demo/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 14 Sep 2024 14:17:59 GMT -->
 </html>

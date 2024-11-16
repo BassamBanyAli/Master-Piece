@@ -44,6 +44,67 @@
         <link type="text/css"
               href="../assets/css/app.css"
               rel="stylesheet">
+              <style>
+      /* Adjust card styles to make them even smaller */
+.dashboard-card {
+    border-radius: 6px;  /* Slightly smaller border radius */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);  /* Lighter shadow */
+    background-color: #f8f9fa;
+    padding: 6px;  /* Smaller padding */
+    text-align: center;
+    height: 100px;  /* Even smaller height */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center the content vertically */
+}
+
+.dashboard-card h2 {
+    font-size: 1.2rem;  /* Even smaller font size */
+    font-weight: bold;
+    margin-bottom: 2px;  /* Reduced margin */
+}
+
+.dashboard-card h5 {
+    color: #6c757d;
+    font-size: 0.75rem;  /* Even smaller font size */
+    margin-bottom: 2px;  /* Reduced margin */
+}
+
+.dashboard-card .crdbg_4 {
+    background-color: #28a745;
+    color: white;
+    padding: 2px 5px;  /* Smaller padding */
+    border-radius: 15px;  /* Smaller border radius */
+    font-size: 0.65rem;  /* Smaller font size */
+}
+
+/* Flex container to adjust card layout */
+.card-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.card-container .col-lg-3 {
+    flex: 1;
+    min-width: 120px;  /* Further reduced min-width */
+    max-width: 180px;  /* Max width to keep cards compact */
+}
+
+/* For responsive behavior on small screens */
+@media (max-width: 768px) {
+    .card-container {
+        flex-direction: column;
+    }
+
+    .card-container .col-lg-3 {
+        min-width: 100%;
+        max-width: none;
+        margin-bottom: 10px;
+    }
+}
+</style>
 
     </head>
 
@@ -167,39 +228,88 @@
                         <div class="container-fluid page__container">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="../student-dashboard.html">Home</a></li>
-                                <li class="breadcrumb-item active">Instructors</li>
+                                <li class="breadcrumb-item active">Courses Financial Details</li>
                             </ol>
-                            <h1 class="h2">Instructors</h1>
+                            <h1 class="h2">Course Financial Details</h1>
 
-                            <div class="search-form search-form--light mb-3">
-                                <input type="text"
-                                       class="form-control search"
-                                       id="searchInput"  
-                                       placeholder="Search">
-                                <button class="btn"
-                                        type="button"
-                                        role="button"
-                                        onclick="searchStudent()"> <!-- Add an onclick to trigger search -->
-                                    <i class="material-icons">search</i>
-                                </button>
+
+                            <div class="container my-5">
+                                <div class="card-container">
+                                    <!-- Total Students Card -->
+                                    <div class="col-lg-3">
+                                        <div class="card dashboard-card">
+                                            <h5>Total Students</h5>
+                                            <h2 id="totalStudents">0</h2>
+
+                                        </div>
+                                    </div>
+                        
+                                    <!-- Total Courses Card -->
+                                    <div class="col-lg-3">
+                                        <div class="card dashboard-card">
+                                            <h5>Total Courses</h5>
+                                            <h2 id="totalCourses">0</h2>
+                                        </div>
+                                    </div>
+                        
+                                    <!-- Total Instructors Card -->
+                                    <div class="col-lg-3">
+                                        <div class="card dashboard-card">
+                                            <h5>Total Instructors</h5>
+                                            <h2 id="totalInstructors">0</h2>
+                                        </div>
+                                    </div>
+                        
+                                    <!-- Total Sales Card -->
+                                    <div class="col-lg-3">
+                                        <div class="card dashboard-card">
+                                            <h5>Total Sales</h5>
+                                            <h2 id="totalSales">$0</h2>
+                                        </div>
+                                    </div>
+                        
+                                    <!-- New Card with Temporary Content -->
+                                    <div class="col-lg-3">
+                                        <div class="card dashboard-card">
+                                            <h5>Total Profit to me</h5>
+                                            <h2 id="totalProfit">500</h2>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <div class="card dashboard-card">
+                                            <h5>All Profit for Instructors</h5>
+                                            <h2 id="allProfitInstructors">0</h2>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            
-                            <table class="table mb-0">
-                                <thead>
-                                    <tr>
-                                        <th>Full Name</th>
-                                        <th style="width: 200px;">Email</th>
-                                        <th style="width: 150px;">Department</th>
 
-                                        <th style="width: 150px;">Enrolled Date</th>
-                                        <th style="width: 150px;">grade</th>
-                                        <th style="width: 24px;"></th>
-                                    </tr>
-                                </thead>
-                                <tbody class="list" id="studentList">
-                                    <!-- Dynamic content will be inserted here by JavaScript -->
-                                </tbody>
-                            </table>
+
+                            
+<!-- Container for the "No courses" message -->
+<div id="noCoursesMessage" style="display: none; padding: 20px; background-color: #f8d7da; border: 1px solid #f5c6cb; border-radius: 5px; color: #721c24; text-align: center;">
+    <strong>No pending courses at the moment.</strong>
+</div>
+
+<!-- Table for displaying courses -->
+        <table class="table mb-0">
+            <thead>
+                <tr>
+                    <th style="width: 400px;">Course Name</th>
+                    <th style="width: 400px;">Instructor Name</th>
+                    <th style="width: 400px;">Total Amount ($)</th>
+                    <th style="width: 400px;">Instructor Earnings ($)</th>
+                    <th style="width: 400px;">Admin Earnings ($)</th>
+                    <th style="width: 400px;">Number of Students</th>
+                    <th style="width: 400px;">Payment Date</th>
+                </tr>
+            </thead>
+            <tbody id="revenueTableBody">
+                <!-- Rows will be dynamically added here -->
+            </tbody>
+        </table>
+
+
                             
                             
 
@@ -229,7 +339,7 @@
                                         </li>
                                         <li class="sidebar-menu-item ">
                                             <a class="sidebar-menu-button"
-                                               href="instructors.html">
+                                               href="../instructors/instructors.html">
                                                 <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">school</i> Instructor
                                             </a>
                                         </li>
@@ -241,14 +351,20 @@
                                         </li>
                                         <li class="sidebar-menu-item">
                                             <a class="sidebar-menu-button"
-                                               href="../pendingCourses/index.html">
+                                               href="index.html">
                                                 <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">search</i> Pending Courses
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-menu-item">
+                                            <a class="sidebar-menu-button"
+                                               href="/pendingInstructor/instructor.html">
+                                                <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">search</i> Pending Instructors
                                             </a>
                                         </li>
                                         <li class="sidebar-menu-item active">
                                             <a class="sidebar-menu-button"
-                                               href="/pendingInstructor/instructor.html">
-                                                <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">search</i> Pending Instructors
+                                               href="../Course Financial Details/index.html">
+                                                <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">comment</i>Course Financial Details
                                             </a>
                                         </li>
                                         <li class="sidebar-menu-item">
@@ -388,7 +504,7 @@
         <script src="../assets/js/page.student-dashboard.js"></script>
         <script src="checkLogin.js"></script>
         <script src="students.js"></script>
-        <script src="instructor.js"></script>
+        <script src="index.js"></script>
 
     </body>
 

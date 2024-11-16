@@ -37,37 +37,114 @@ async function signOut() {
 }
 
 
-async function getInstructorId() {
-    // Retrieve the email from localStorage
-    var email = localStorage.getItem('instructorEmail');
-    
-    if (!email) {
-        alert('Instructor email not found in local storage.');
-        return;
-    }
 
-    // Construct the API URL with the email query parameter
-    var url = `https://localhost:7246/api/Instructors/getInstructorIdByEmail?email=${email}`;
 
+async function updateTotal() {
     try {
-        // Make the API call to fetch the instructor ID
-        const response = await fetch(url, {
-            method: 'GET',
-        });
-
-        // Check if the response is successful
-        if (response.ok) {
-            const result = await response.json();
-            // Save the instructor ID to localStorage
-            localStorage.setItem('instructorId', result.instructorId);
-
-        } else {
-            const errorData = await response.json();
-
+        var instructorId=localStorage.getItem("instructorId");
+        // Fetch total students
+        const response = await fetch(`https://localhost:7246/api/Revenue/total-students/${instructorId}`);
+        if (!response.ok) {
+            throw new Error(`Failed to fetch: ${response.statusText}`);
         }
-    } catch (error) {
-        console.error('Error:', error);
 
+        const result = await response.json();
+        document.getElementById("totalStudents").innerHTML = result.totalStudents;
+
+        // Fetch total courses
+        const response2 = await fetch(`https://localhost:7246/api/Revenue/getCoursesForInstructor?instructorId=${instructorId}`);
+        if (!response2.ok) {
+            throw new Error(`Failed to fetch: ${response2.statusText}`);
+        }
+
+        const result2 = await response2.json();
+        document.getElementById("totalCourses").innerHTML = result2;
+
+    } catch (error) {
+        console.error("Error updating totals:", error);
+
+        // Optionally display an error message in the HTML
+        const errorElement = document.createElement("p");
+        errorElement.textContent = "Failed to load data.";
+        errorElement.style.color = "red";
+
+        const cardDashLeft = document.querySelector(".card_dash_left");
+        cardDashLeft.appendChild(errorElement);
     }
 }
-getInstructorId();
+
+// Example usage with a specific instructorId
+updateTotal();
+async function getTotalProfits() {
+    try {
+        var instructorId=localStorage.getItem("instructorId");
+        debugger;
+        const response = await fetch(`https://localhost:7246/api/Revenue/total-profits-for-instructor?instructorId=${instructorId}`);
+        if (!response.ok) {
+            throw new Error('Failed to fetch total profits');
+        }
+
+        const result = await response.json();
+        console.log('Total profits:', result.totalProfits);
+
+        // You can now update the HTML with the total instructors
+        document.getElementById('totalProfits').innerHTML = result.totalProfits+"$";
+    } catch (error) {
+        console.error('Error fetching total profits:', error);
+    }
+}
+
+// Call the function to get total instructors
+getTotalProfits();
+
+
+
+async function updateTotalSales() {
+    try {
+        var instructorId=localStorage.getItem("instructorId");
+        // Fetch the total sales from the API
+        const response = await fetch(`https://localhost:7246/api/Revenue/total-sales-for-instructor?instructorId=${instructorId}`);
+        
+        // Check if the response is OK
+        if (!response.ok) {
+            throw new Error(`Failed to fetch: ${response.statusText}`);
+        }
+
+        // Parse the JSON response
+        const result = await response.json();
+
+        // Update the total sales in the HTML element
+        document.getElementById("totalSales").innerHTML = result.totalSales+"$";
+
+    } catch (error) {
+        console.error("Error updating total sales:", error);
+
+        // Optionally display an error message in the HTML
+        const errorElement = document.createElement("p");
+        errorElement.textContent = "Failed to load total sales data.";
+        errorElement.style.color = "red";
+
+        const cardDashLeft = document.querySelector(".card_dash_left");
+        cardDashLeft.appendChild(errorElement);
+    }
+}
+
+// Example usage
+updateTotalSales();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
