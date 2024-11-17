@@ -1,4 +1,5 @@
 async function myCourses() {
+    debugger;
     // Retrieve the instructor ID from localStorage
     const id = localStorage.getItem("instructorId");
 

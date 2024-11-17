@@ -73,7 +73,7 @@ localStorage.setItem("instructorId",result.instructorId);
         messageButton.className = "subscribe-btn btn500";
         messageButton.textContent = "View Instructor Profile";
         messageButton.onclick = function () {
-            window.location.href = "instructor_profile_viewLogin.html";
+            window.location.href = "../instructor_profile_viewLogin.html";
         };
         
         document.getElementById("messageButtonContainer").appendChild(messageButton);
@@ -95,6 +95,7 @@ localStorage.setItem("instructorId",result.instructorId);
         videoPlayer.src = result.tutorialVideo;
         image.src = `https://localhost:7246/uploads/${result.image}`; // Use result.image
         localStorage.setItem("image", result.image);
+        localStorage.setItem('videoSrc', result.tutorialVideo);
 
     } catch (error) {
         console.error('Error fetching course details:', error);
@@ -104,9 +105,18 @@ localStorage.setItem("instructorId",result.instructorId);
 // Call the function
 course_details();
 
-document.getElementById('videoModal').addEventListener('hidden.bs.modal', function () {
-    const videoPlayer = document.getElementById("videoPlayer");
-    videoPlayer.src = ""; // Clear the src to stop the video
+// Modal event listeners
+const videoModal = document.getElementById('videoModal');
+const videoPlayer = document.getElementById('videoPlayer');
+
+// Event listener for when the modal is shown
+videoModal.addEventListener('shown.bs.modal', function () {
+    videoPlayer.src = localStorage.getItem('videoSrc') || '';
+});
+
+// Event listener for when the modal is hidden
+videoModal.addEventListener('hidden.bs.modal', function () {
+    videoPlayer.src = ''; // Clear the src to stop the video
 });
 
 

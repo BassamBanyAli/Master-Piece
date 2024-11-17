@@ -1,5 +1,5 @@
 async function getProfile() {
-    debugger;
+
     var id = localStorage.getItem("id");
     var url = `https://localhost:7246/api/Users/getProfile?userId=${id}`;
 
@@ -131,6 +131,102 @@ async function updateTotalSales() {
 
 // Example usage
 updateTotalSales();
+
+
+async function loadRevenueDetails() {
+    debugger;
+    const instructorId = localStorage.getItem("instructorId"); // Get instructor ID from local storage
+    const apiUrl = `https://localhost:7246/api/Revenue/course-revenue-details/${instructorId}`;
+    const tableBody = document.getElementById("revenueTableBody");
+    const noDataMessage = document.getElementById("noDataMessage");
+
+    try {
+        const response = await fetch(apiUrl);
+
+        // Handle not found (404) response
+        if (response.status === 404) {
+            noDataMessage.classList.remove("d-none");
+            tableBody.innerHTML = ""; // Clear table body
+            return;
+        }
+
+        // Handle other errors
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const revenueDetails = await response.json();
+
+        // Clear table body and hide the no-data message
+        tableBody.innerHTML = "";
+        noDataMessage.classList.add("d-none");
+
+        if (revenueDetails.length === 0) {
+            noDataMessage.classList.remove("d-none");
+        } else {
+            // Populate table rows with revenue details
+            revenueDetails.forEach(detail => {
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                    <td>${detail.courseName}</td>
+                    <td>${detail.totalAmount.toFixed(2)}</td>
+                    <td>${detail.instructorEarnings.toFixed(2)}</td>
+                    <td>${detail.adminEarnings.toFixed(2)}</td>
+                    <td>${detail.numberOfStudents}</td>
+                    <td>${detail.paymentDate ? new Date(detail.paymentDate).toLocaleDateString() : "N/A"}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+    } catch (error) {
+        console.error("Error fetching revenue details:", error);
+        tableBody.innerHTML = `<tr><td colspan="6" class="text-center text-danger">Failed to load data.</td></tr>`;
+    }
+}
+
+// Load revenue details on page load
+document.addEventListener("DOMContentLoaded", loadRevenueDetails);
+
+
+
+
+async function updateRevenueForInstructor() {
+    debugger; // Debugger to pause execution for debugging in development
+    const instructorId = localStorage.getItem("instructorId");
+    const apiUrl = `https://localhost:7246/api/Revenue/update-revenue`;
+
+    if (!instructorId) {
+        console.error("Instructor ID not found in local storage.");
+        return; // Stop execution if instructorId is not available
+    }
+
+    try {
+        const response = await fetch(`${apiUrl}?instructorId=${instructorId}`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+
+        // Check for response status
+        if (!response.ok) {
+            const errorData = await response.json();
+            console.error("Error updating revenue:", errorData);
+            return;
+        }
+
+        // Parse the response and log the result
+        const result = await response.json();
+        console.log("Revenue update successful:", result.message);
+    } catch (error) {
+        console.error("Error while updating revenue:", error);
+    }
+}
+
+// Automatically call the function when the page loads
+window.onload = updateRevenueForInstructor;
+
+
 
 
 

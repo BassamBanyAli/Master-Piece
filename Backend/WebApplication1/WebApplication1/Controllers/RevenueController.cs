@@ -18,6 +18,12 @@ namespace WebApplication1.Controllers
             _db = db;
             _revenueService = revenueService;
         }
+        [HttpGet]
+        public IActionResult Get()
+        {
+            var revenuie=_db.RevenueDetails.ToList();
+            return Ok(revenuie);
+        }
 
         [HttpPost("update-revenue")]
         public async Task<IActionResult> UpdateRevenue(int instructorId)
@@ -284,6 +290,51 @@ namespace WebApplication1.Controllers
                 return StatusCode(500, new { message = ex.Message });
             }
         }
+
+
+        [HttpGet("course-revenue-details/{instructorId}")]
+        public ActionResult<IEnumerable<RevenueDetailDto>> GetRevenueDetailsForInstructor(int instructorId)
+        {
+            try
+            {
+                // Check if the instructor exists
+                var instructorExists = _db.Instructors.Any(i => i.InstructorId == instructorId);
+                if (!instructorExists)
+                {
+                    return NotFound(new { message = $"Instructor with ID {instructorId} not found." });
+                }
+
+                // Retrieve revenue details for the specific instructor
+                var revenueDetails = _db.RevenueDetails
+                    .Include(r => r.Course)           // Include the course details
+                    .Where(r => r.InstructorId == instructorId) // Filter by instructor ID
+                    .Select(r => new RevenueDetailDto
+                    {
+                        CourseName = r.Course.CourseName,
+                        TotalAmount = r.TotalAmount,
+                        InstructorEarnings = r.InstructorEarnings,
+                        AdminEarnings = r.AdminEarnings,
+                        NumberOfStudents = r.NumberOfStudents,
+                        PaymentDate = r.PaymentDate
+                    })
+                    .ToList();
+
+                // Check if any revenue details were found
+                if (!revenueDetails.Any())
+                {
+                    return NotFound(new { message = $"No revenue details found for instructor ID {instructorId}." });
+                }
+
+                return Ok(revenueDetails);
+            }
+            catch (Exception ex)
+            {
+                // Handle exceptions
+                return StatusCode(500, new { message = "An error occurred while processing your request.", error = ex.Message });
+            }
+        }
+
+
 
 
 

@@ -85,7 +85,6 @@ public partial class MyDbContext : DbContext
             entity.HasKey(e => e.CourseId).HasName("PK__Courses__C92D71A73022F1D7");
 
             entity.Property(e => e.CourseAuthor).HasMaxLength(255);
-            entity.Property(e => e.CourseDescription).HasMaxLength(255);
             entity.Property(e => e.CourseName).HasMaxLength(255);
             entity.Property(e => e.CourseTitle).HasMaxLength(255);
             entity.Property(e => e.CreatedAt)
