@@ -42,6 +42,46 @@
     border-radius: 50%; /* Makes the image round */
 }
 
+
+
+
+
+
+
+
+.preview_video .fcrse_img img {
+        width: 400px; /* Set the desired width */
+        height: 200px; /* Set the desired height */
+        object-fit: cover; /* Ensures the image is cropped proportionally if needed */
+        border-radius: 8px; /* Optional: Add rounded corners for better aesthetics */
+    }
+
+    .preview_video .fcrse_img {
+        display: block;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .course-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out;
+    }
+
+    .preview_video .fcrse_img:hover .course-overlay {
+        opacity: 1; /* Show overlay on hover */
+    }
+
 		</style>
 		
 	</head> 
@@ -136,7 +176,7 @@
 			<div class="left_section">
 				<ul>
 					<li class="menu--item">
-						<a href="indexBeforeLogin.html" class="menu--link active" title="Home">
+						<a href="index.html" class="menu--link active" title="Home">
 							<i class='uil uil-home-alt menu--icon'></i>
 							<span class="menu--label">Home</span>
 						</a>

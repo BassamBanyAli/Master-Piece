@@ -132,15 +132,27 @@
 			<div class="left_section">
 				<ul>
 					<li class="menu--item">
-						<a href="/beforeLogin/indexBeforeLogin.html" class="menu--link active" title="Home">
+						<a href="index.html" class="menu--link" title="Home">
 							<i class='uil uil-home-alt menu--icon'></i>
 							<span class="menu--label">Home</span>
 						</a>
 					</li>
 					<li class="menu--item">
-						<a href="/beforeLogin/explore.html" class="menu--link" title="Explore">
+						<a href="courses.html" class="menu--link" title="Explore">
 							<i class='uil uil-search menu--icon'></i>
 							<span class="menu--label">Courses</span>
+						</a>
+					</li>
+                    <li class="menu--item">
+						<a href="beforeLogin/myCourses.html" class="menu--link" title="Saved Courses">
+						  <i class="uil uil-heart-alt menu--icon"></i>
+						  <span class="menu--label">My Courses</span>
+						</a>
+					</li>
+					<li class="menu--item">
+						<a href="instructors/instructorsStudent.html" class="menu--link active" title="Explore">
+							<i class='uil uil-search menu--icon'></i>
+							<span class="menu--label">Instructors</span>
 						</a>
 					</li>
 
@@ -486,6 +498,29 @@
 	<script src="js/custom.js"></script>	
 	<script src="js/night-mode.js"></script>
 	<script src="instructor_profile_view.js"></script>	
+	<script>
+		document.addEventListener("DOMContentLoaded", function() {
+    const courseDataArray = JSON.parse(localStorage.getItem("courseDataArray")) || [];
+    console.log(courseDataArray); // Check the value of courseDataArray
+    const cartItemCount = courseDataArray.length;
+    console.log(cartItemCount); // Check the item count
+    
+    const notiCountElement = document.querySelector(".noti_count");
+    if (notiCountElement) {
+        notiCountElement.textContent = cartItemCount;
+    }
+});
+
+async function signOut() {
+    debugger;
+    localStorage.removeItem("id");
+    window.location.href="Login/sign_in.html"
+    
+}
+
+
+
+	</script>
 	
 </body>
 

@@ -1,5 +1,5 @@
 async function getProfile() {
-    debugger;
+
     var id = localStorage.getItem("id");
     var url = `https://localhost:7246/api/Users/getProfile?userId=${id}`;
 
@@ -114,26 +114,50 @@ course_details();
 
 
 async function saveInLocalStorage() {
+    debugger;
     const courseId = localStorage.getItem("courseId");
-    // Get the content or values of the elements
-    const description = document.getElementById("description").innerText;
-    const name = document.getElementById("courseName").innerText;
-    const title = document.getElementById("courseTitle").innerText;
-    const price = document.getElementById("coursePrice").innerText;
-    const image=localStorage.getItem("image");
-    const courseAuth=localStorage.getItem("courseAuth");
+    const studentId = localStorage.getItem("studentId");
 
-    // Create a new course object
-    const newCourseData = {
-        courseId,
-        image,
-        description,
-        name,
-        title,
-        price,
-        courseAuth
+    // Define default course object
+    const courseDefaults = {
+        description: document.getElementById("description").innerText || "",
+        name: document.getElementById("courseName").innerText || "",
+        title: document.getElementById("courseTitle").innerText || "",
+        price: document.getElementById("coursePrice").innerText || "",
+        image: localStorage.getItem("image") || "",
+        courseAuth: localStorage.getItem("courseAuth") || ""
     };
 
+    try {
+        // If studentId is not in localStorage, directly add course to localStorage
+        if (!studentId) {
+            addToLocalStorage(courseId, courseDefaults);
+            alert("You added this course to your cart.");
+            location.reload();
+            return;
+        }
+
+        // Call API to check enrollment
+        const apiUrl = `https://localhost:7246/api/CartItems/CheckEnrollment?studentId=${studentId}&courseId=${courseId}`;
+        const response = await fetch(apiUrl);
+
+        if (response.ok) {
+            alert("You already bought this course."); // Show success message
+        } else if (response.status === 404) {
+            // Course not enrolled, add to localStorage
+            addToLocalStorage(courseId, courseDefaults);
+            alert("You added this course to your cart."); // Show success message
+        } else {
+            alert("An unexpected error occurred.");
+        }
+    } catch (error) {
+        console.error("Error checking enrollment:", error);
+        alert("Failed to check enrollment. Please try again later.");
+    }
+}
+
+// Helper function to handle adding course to localStorage
+function addToLocalStorage(courseId, courseData) {
     // Retrieve existing array from localStorage or initialize an empty array
     let courseDataArray = JSON.parse(localStorage.getItem("courseDataArray")) || [];
 
@@ -142,10 +166,11 @@ async function saveInLocalStorage() {
 
     // If course doesn't exist, add it to the array and save back to localStorage
     if (!courseExists) {
-        courseDataArray.push(newCourseData);
+        courseDataArray.push({ courseId, ...courseData });
         localStorage.setItem("courseDataArray", JSON.stringify(courseDataArray));
     }
 }
+
 
 
 
@@ -188,3 +213,22 @@ async function content() {
     }
     
 }
+
+
+
+
+
+
+
+
+document.addEventListener("DOMContentLoaded", function() {
+    const courseDataArray = JSON.parse(localStorage.getItem("courseDataArray")) || [];
+    console.log(courseDataArray); // Check the value of courseDataArray
+    const cartItemCount = courseDataArray.length;
+    console.log(cartItemCount); // Check the item count
+    
+    const notiCountElement = document.querySelector(".noti_count");
+    if (notiCountElement) {
+        notiCountElement.textContent = cartItemCount;
+    }
+});

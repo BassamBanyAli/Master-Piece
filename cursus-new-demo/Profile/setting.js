@@ -1,19 +1,44 @@
 async function setting(event) {
     event.preventDefault();
-    
+
+    var form = document.getElementById("form");
+    var formData = new FormData(form);
+
+    // Get values for the passwords
+    var oldPassword = formData.get("oldPassword");
+    var newPassword = formData.get("password");
+    var repeatPassword = formData.get("repeatPassword"); // Assuming you have a field for repeating the new password
+
+    // Password validation checks
+    if (newPassword && repeatPassword) {
+        // Ensure both passwords match
+        if (newPassword !== repeatPassword) {
+            alert('New passwords do not match. Please make sure both passwords are the same.');
+            return;
+        }
+
+        // Check password length (you can change 6 to your required minimum length)
+        if (newPassword.length < 8) {
+            alert('Password must be at least 6 characters long.');
+            return;
+        }
+
+        // Check if the new password is the same as the old password
+        if (newPassword === oldPassword) {
+            alert('New password cannot be the same as the old password.');
+            return;
+        }
+    }
+
     var id = localStorage.getItem("id");
     var url = `https://localhost:7246/api/Users/setting?id=${id}`;
-    var form = document.getElementById("form");
-
-    // Initialize FormData with form inputs
-    var formData = new FormData(form);
 
     // Set default values for optional fields if they are empty
     formData.set("FullName", formData.get("FullName") || "");
     formData.set("Debartement", formData.get("Debartement") || "");
     formData.set("About", formData.get("About") || "");
-    formData.set("oldPassword", formData.get("oldPassword") || "");
-    formData.set("password", formData.get("password") || "");
+    formData.set("oldPassword", oldPassword || "");
+    formData.set("password", newPassword || "");
 
     // Handle Image File
     var imageInput = document.getElementById("profileImageInput");
@@ -35,6 +60,7 @@ async function setting(event) {
 
         if (response.ok) {
             alert('Successfully edited profile');
+            location.href = "my_student_profile_view.html";
         } else {
             const errorData = await response.json();
             alert('Error: ' + (errorData.message || 'Profile update failed'));

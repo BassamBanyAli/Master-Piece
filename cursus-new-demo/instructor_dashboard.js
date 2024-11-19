@@ -76,6 +76,7 @@ async function updateTotal() {
 // Example usage with a specific instructorId
 updateTotal();
 async function getTotalProfits() {
+    debugger;
     try {
         var instructorId=localStorage.getItem("instructorId");
         debugger;

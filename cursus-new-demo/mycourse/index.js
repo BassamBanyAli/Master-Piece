@@ -105,19 +105,7 @@ localStorage.setItem("instructorId",result.instructorId);
 // Call the function
 course_details();
 
-// Modal event listeners
-const videoModal = document.getElementById('videoModal');
-const videoPlayer = document.getElementById('videoPlayer');
 
-// Event listener for when the modal is shown
-videoModal.addEventListener('shown.bs.modal', function () {
-    videoPlayer.src = localStorage.getItem('videoSrc') || '';
-});
-
-// Event listener for when the modal is hidden
-videoModal.addEventListener('hidden.bs.modal', function () {
-    videoPlayer.src = ''; // Clear the src to stop the video
-});
 
 
 async function saveInLocalStorage() {
@@ -215,7 +203,7 @@ function openVideoModal(videoUrl) {
     // Set the iframe src to the provided video URL
     const videoPlayer = document.getElementById("videoPlayer");
     videoPlayer.src = videoUrl;
-
+    console.log("Video URL set:", videoUrl);
     // Show the modal
     const videoModal = new bootstrap.Modal(document.getElementById('videoModal'), {});
     videoModal.show();
@@ -238,6 +226,7 @@ async function signOut() {
 
 // Call the function to load content when the page loads
 
+// Modal event listeners
 
 
 

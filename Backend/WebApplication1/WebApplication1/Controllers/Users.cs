@@ -40,6 +40,7 @@ namespace WebApplication1.Controllers
                 RoleId = model.roleId,
                 Debartement = "",
                 About = "",
+                Image="default.png"
             };
 
             _db.Users.Add(user);

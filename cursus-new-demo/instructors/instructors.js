@@ -116,49 +116,32 @@ function handleInstructorClick(instructorId) {
 
 
 
-async function getProfile() {
+
+
+
+
+
+
+async function signOut() {
     debugger;
-    var id = localStorage.getItem("id");
-    var url = `https://localhost:7246/api/Users/getProfile?userId=${id}`;
-
-    try {
-        var response = await fetch(url, {
-            method: "GET"
-        });
-
-        if (response.ok) {
-            var result = await response.json();
-
-            // Check if elements exist before updating them
-            const profileImage = document.getElementById("profile-image");
-            const firstProfileImage = document.getElementById("firstProfile-image");
-            const profileName = document.getElementById("profile-name");
-            const profileEmail = document.getElementById("profile-email");
-
-            if (profileImage) {
-                profileImage.src = `https://localhost:7246/uploads/${result.image}`;
-            }
-            if (firstProfileImage) {
-                firstProfileImage.src = `https://localhost:7246/uploads/${result.image}`;
-            }
-            if (profileName) {
-                profileName.textContent = result.fullName;
-            }
-            if (profileEmail) {
-                profileEmail.textContent = result.email;
-            }
-
-        } else {
-            const errorData = await response.json();
-            alert('Error: ' + (errorData.message || 'Profile retrieval failed'));
-        }
-    } catch (error) {
-        console.error('Error:', error);
-        alert('An error occurred while retrieving the profile. Please try again.');
-    }
+    localStorage.removeItem("id");
+    window.location.href="Login/sign_in.html"
+    
 }
 
-getProfile();
+
+document.addEventListener("DOMContentLoaded", function() {
+    const courseDataArray = JSON.parse(localStorage.getItem("courseDataArray")) || [];
+    console.log(courseDataArray); // Check the value of courseDataArray
+    const cartItemCount = courseDataArray.length;
+    console.log(cartItemCount); // Check the item count
+    
+    const notiCountElement = document.querySelector(".noti_count");
+    if (notiCountElement) {
+        notiCountElement.textContent = cartItemCount;
+    }
+});
+
 
 
 

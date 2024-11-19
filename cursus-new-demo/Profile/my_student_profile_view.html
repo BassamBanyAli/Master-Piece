@@ -60,6 +60,23 @@
     margin-bottom: 10px; /* Space below the name */
 }
 
+
+.no-orders-box {
+    background-color: #f8d7da; /* Light red background */
+    color: #721c24; /* Dark red text */
+    border: 1px solid #f5c6cb; /* Red border */
+    padding: 20px;
+    border-radius: 5px;
+    margin-top: 20px;
+    text-align: center;
+    font-size: 16px;
+}
+
+.no-orders-box p {
+    margin: 0;
+}
+
+
 		</style>	
 		
 	</head> 
@@ -82,7 +99,7 @@
 		<div class="header_right">
 			<ul>
 				<li>
-					<a href="Login/sign_up.html" class="upload_btn" title="Create New Course">Create New Course</a>
+					<a href="Login/sign_up.html" class="upload_btn" title="Create New Course">Become an Instructor</a>
 				</li>
 				<li>
 					<a href="cartPaymentInstructor/cart.html" class="option_links" title="cart"><i class='uil uil-shopping-cart-alt'></i><span class="noti_count">2</span></a>
@@ -107,7 +124,7 @@
 								</div>							
 							</div>
 							
-							<a href="Profile/my_student_profile_view.html" class="dp_link_12">View your Profile</a>						
+							<a href="my_student_profile_view.html" class="dp_link_12">View your Profile</a>						
 						</div>
 						<div class="night_mode_switch__btn">
 							<a href="#" id="night-mode" class="btn-night-mode">
@@ -117,7 +134,7 @@
 								</span>
 							</a>
 						</div>
-						<a href="Login/sign_in.html" class="item channel_item" onclick="signOut()">Sign Out</a>
+						<a href="../Login/sign_in.html" class="item channel_item" onclick="signOut()">Sign Out</a>
 					</div>
 				</li>
 			</ul>
@@ -208,16 +225,13 @@
 
 								</div>
 								<div class="col-lg-6">
-									<a href="setting.html" class="_216b12">										
-										<span><i class="uil uil-cog"></i></span>Setting
-									</a>
-									<div class="rgt-145">
-
-									</div>
 									<ul class="_bty149">
-										<li><button class="msg125 btn500" onclick="window.location.href = 'setting.html';">Edit</button></li>								
+										<li>
+											<button class="msg125 btn500" onclick="window.location.href = 'setting.html';" style="margin-top: 30px;">Edit</button>
+										</li>								
 									</ul>	
-								</div>													
+								</div>
+																				
 							</div>							
 						</div>							
 					</div>															

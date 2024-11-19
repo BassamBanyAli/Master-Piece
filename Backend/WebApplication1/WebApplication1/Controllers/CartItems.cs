@@ -63,5 +63,25 @@ namespace WebApplication1.Controllers
             return Ok(new { message = "Items were added to the cart successfully if they weren't already present." });
         }
 
+
+        [HttpGet("CheckEnrollment")]
+        public IActionResult CheckEnrollment(int studentId, int courseId)
+        {
+            // Check if the student is enrolled in the course
+            var enrollment = _db.StudentCourses
+                                      .FirstOrDefault(sc => sc.StudentId == studentId && sc.CourseId == courseId);
+
+            if (enrollment != null)
+            {
+                return Ok(new { message = "Student is enrolled in the course." });
+            }
+
+            return NotFound(new { error = "Student is not enrolled in the specified course." });
+        }
+
+
+
+
+
     }
 }

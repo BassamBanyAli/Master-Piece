@@ -24,9 +24,7 @@ async function explore() {
                         <div class="auth1lnkprce">
                             <p class="cr1fot">By <a href="#">${element.courseAuthor}</a></p>
                             <div id="coursePrice" class="prce142">$${element.price}</div>
-                            <button class="shrt-cart-btn" title="cart">
-                                <i class="uil uil-shopping-cart-alt" onclick="saveInLocalStorage(${element.courseId}, '${element.courseName}', '${element.department}', '${element.price}', '${element.image}')"></i>
-                            </button>
+
                         </div>
                     </div>
                 </div>                                                     
@@ -69,9 +67,7 @@ async function searchCourses(query) {
                         <div class="auth1lnkprce">
                             <p class="cr1fot">By <a href="#">${element.courseAuthor}</a></p>
                             <div class="prce142">$${element.price}</div>
-                            <button class="shrt-cart-btn" title="cart">
-                                <i class="uil uil-shopping-cart-alt" onclick="saveInLocalStorage(${element.courseId})"></i>
-                            </button>
+
                         </div>
                     </div>
                 </div>
@@ -111,33 +107,7 @@ function handleCourseClick(element) {
 }
 
 
-async function saveInLocalStorage(courseId, name, department, price, image) {
-    debugger;
-    // Get the content or values of the elements
 
-
-
-    // Create a new course object
-    const newCourseData = {
-        courseId,
-        image,
-        name,
-        department,
-        price
-    };
-
-    // Retrieve existing array from localStorage or initialize an empty array
-    let courseDataArray = JSON.parse(localStorage.getItem("courseDataArray")) || [];
-
-    // Check if the course with the same courseId already exists
-    const courseExists = courseDataArray.some(course => course.courseId === courseId);
-
-    // If course doesn't exist, add it to the array and save back to localStorage
-    if (!courseExists) {
-        courseDataArray.push(newCourseData);
-        localStorage.setItem("courseDataArray", JSON.stringify(courseDataArray));
-    }
-}
 
 
 
@@ -190,9 +160,7 @@ async function fetchCoursesByCategory(departmentName) {
                         <div class="auth1lnkprce">
                             <p class="cr1fot">By <a href="#">${element.courseAuthor}</a></p>
                             <div class="prce142">$${element.price}</div>
-                            <button class="shrt-cart-btn" title="cart">
-                                <i class="uil uil-shopping-cart-alt" onclick="saveInLocalStorage(${element.courseId})"></i>
-                            </button>
+
                         </div>
                     </div>
                 </div>
@@ -247,4 +215,22 @@ async function getProfile() {
 }
 
 getProfile();
+
+
+
+
+
+
+document.addEventListener("DOMContentLoaded", function() {
+    const courseDataArray = JSON.parse(localStorage.getItem("courseDataArray")) || [];
+    console.log(courseDataArray); // Check the value of courseDataArray
+    const cartItemCount = courseDataArray.length;
+    console.log(cartItemCount); // Check the item count
+    
+    const notiCountElement = document.querySelector(".noti_count");
+    if (notiCountElement) {
+        notiCountElement.textContent = cartItemCount;
+    }
+});
+
 

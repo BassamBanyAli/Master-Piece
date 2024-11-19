@@ -72,7 +72,9 @@ function isLoggedIn() {
 
 function redirectToCheckout() {
     if (isLoggedIn()) {
+        saveToCartTable();
         window.location.href = '../payement/index.html'; // Navigate to checkout page
+
     } else {
         alert('You need to log in first.');
         window.location.href = '../Login/sign_in.html'; // Redirect to login page
@@ -139,7 +141,7 @@ async function saveToCartTable() {
         console.error("User ID not found in localStorage.");
     }
 }
-saveToCartTable();
+
 
 
 
