@@ -123,5 +123,19 @@ pendingCourses();
     }
     
     getProfile();
+
+
+
+    document.addEventListener("DOMContentLoaded", function() {
+        const courseDataArray = JSON.parse(localStorage.getItem("newCourseDataArray")) || [];
+        console.log(courseDataArray); // Check the value of courseDataArray
+        const cartItemCount = courseDataArray.length;
+        console.log(cartItemCount); // Check the item count
+        
+        const notiCountElement = document.querySelector(".noti_count");
+        if (notiCountElement) {
+            notiCountElement.textContent = cartItemCount;
+        }
+    });
     
     

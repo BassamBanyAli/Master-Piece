@@ -197,11 +197,12 @@ function openVideoModal(videoUrl) {
     // Set the iframe src to the provided video URL
     const videoPlayer = document.getElementById("videoPlayer");
     videoPlayer.src = videoUrl;
-
+    console.log("Video URL set:", videoUrl);
     // Show the modal
     const videoModal = new bootstrap.Modal(document.getElementById('videoModal'), {});
     videoModal.show();
 }
+
 
 
 async function signOut() {
@@ -222,7 +223,17 @@ async function signOut() {
 
 
 
-
+document.addEventListener("DOMContentLoaded", function() {
+    const courseDataArray = JSON.parse(localStorage.getItem("newCourseDataArray")) || [];
+    console.log(courseDataArray); // Check the value of courseDataArray
+    const cartItemCount = courseDataArray.length;
+    console.log(cartItemCount); // Check the item count
+    
+    const notiCountElement = document.querySelector(".noti_count");
+    if (notiCountElement) {
+        notiCountElement.textContent = cartItemCount;
+    }
+});
 
 
 

@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Diagnostics.Metrics;
+using System.IO.Pipelines;
+using System;
 using WebApplication1.Models;
 
 namespace WebApplication1.Controllers
@@ -56,13 +59,15 @@ namespace WebApplication1.Controllers
                 Department = user.Debartement,
                 About = user.About,
                 CreatedAt = user.CreatedAt ?? DateTime.Now,
-                Image = user.Image
+                Image = "default.png"
                 // Additional fields, like HireDate, can be set if needed
             };
 
-            // Add the new instructor to the database
+        // Add the new instructor to the database
             _db.Instructors.Add(instructor);
             user.RoleId = 4;
+            var userInstructor=_db.Users.Find(id);
+            userInstructor.Image = "default.png";
             _db.SaveChanges();
 
             return Ok();

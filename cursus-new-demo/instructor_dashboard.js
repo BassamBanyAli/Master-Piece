@@ -40,46 +40,56 @@ async function signOut() {
 
 
 async function updateTotal() {
+    debugger;
     try {
-        var instructorId=localStorage.getItem("instructorId");
-        // Fetch total students
-        const response = await fetch(`https://localhost:7246/api/Revenue/total-students/${instructorId}`);
-        if (!response.ok) {
-            throw new Error(`Failed to fetch: ${response.statusText}`);
+        var instructorId = localStorage.getItem("instructorId");
+        if (!instructorId) {
+            throw new Error("Instructor ID not found in localStorage");
         }
 
-        const result = await response.json();
-        document.getElementById("totalStudents").innerHTML = result.totalStudents;
+        // Fetch total students
+        const response = await fetch(`https://localhost:7246/api/Revenue/total-students/${instructorId}`);
+        let totalStudents = 0;
+        if (response.ok) {
+            const result = await response.json();
+            totalStudents = result.totalStudents;
+        }
+        document.getElementById("totalStudents").innerHTML = totalStudents;
 
         // Fetch total courses
         const response2 = await fetch(`https://localhost:7246/api/Revenue/getCoursesForInstructor?instructorId=${instructorId}`);
-        if (!response2.ok) {
-            throw new Error(`Failed to fetch: ${response2.statusText}`);
+        let totalCourses = 0;
+        if (response2.ok) {
+            const result2 = await response2.json();
+            totalCourses = result2;
         }
-
-        const result2 = await response2.json();
-        document.getElementById("totalCourses").innerHTML = result2;
+        document.getElementById("totalCourses").innerHTML = totalCourses;
 
     } catch (error) {
         console.error("Error updating totals:", error);
 
-        // Optionally display an error message in the HTML
-        const errorElement = document.createElement("p");
-        errorElement.textContent = "Failed to load data.";
-        errorElement.style.color = "red";
+        // Set default values to 0 if there's an error
+        document.getElementById("totalStudents").innerHTML = 0;
+        document.getElementById("totalCourses").innerHTML = 0;
 
+        // Optionally display an error message in the HTML
         const cardDashLeft = document.querySelector(".card_dash_left");
-        cardDashLeft.appendChild(errorElement);
+        if (cardDashLeft) {
+            const errorElement = document.createElement("p");
+            errorElement.textContent = "Failed to load data.";
+            errorElement.style.color = "red";
+            cardDashLeft.appendChild(errorElement);
+        }
     }
 }
 
-// Example usage with a specific instructorId
+// Example usage
 updateTotal();
+
 async function getTotalProfits() {
-    debugger;
+
     try {
         var instructorId=localStorage.getItem("instructorId");
-        debugger;
         const response = await fetch(`https://localhost:7246/api/Revenue/total-profits-for-instructor?instructorId=${instructorId}`);
         if (!response.ok) {
             throw new Error('Failed to fetch total profits');
@@ -135,7 +145,7 @@ updateTotalSales();
 
 
 async function loadRevenueDetails() {
-    debugger;
+
     const instructorId = localStorage.getItem("instructorId"); // Get instructor ID from local storage
     const apiUrl = `https://localhost:7246/api/Revenue/course-revenue-details/${instructorId}`;
     const tableBody = document.getElementById("revenueTableBody");
@@ -192,7 +202,7 @@ document.addEventListener("DOMContentLoaded", loadRevenueDetails);
 
 
 async function updateRevenueForInstructor() {
-    debugger; // Debugger to pause execution for debugging in development
+ // Debugger to pause execution for debugging in development
     const instructorId = localStorage.getItem("instructorId");
     const apiUrl = `https://localhost:7246/api/Revenue/update-revenue`;
 
@@ -228,7 +238,17 @@ async function updateRevenueForInstructor() {
 window.onload = updateRevenueForInstructor;
 
 
-
+document.addEventListener("DOMContentLoaded", function() {
+    const courseDataArray = JSON.parse(localStorage.getItem("newCourseDataArray")) || [];
+    console.log(courseDataArray); // Check the value of courseDataArray
+    const cartItemCount = courseDataArray.length;
+    console.log(cartItemCount); // Check the item count
+    
+    const notiCountElement = document.querySelector(".noti_count");
+    if (notiCountElement) {
+        notiCountElement.textContent = cartItemCount;
+    }
+});
 
 
 

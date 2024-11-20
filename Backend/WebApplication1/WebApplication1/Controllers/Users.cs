@@ -62,6 +62,10 @@ namespace WebApplication1.Controllers
             // Retrieve roles and generate JWT token
             var roles = _db.Roles.Where(x => x.RoleId == user.RoleId).Select(ur => ur.RoleName).ToList();
             var token = _tokenGenerator.GenerateToken(user.FullName, roles);
+            var InstructorId = _db.Instructors
+                                  .Where(x => x.Email == user.Email)
+                                  .Select(x => x.InstructorId)
+                                  .FirstOrDefault();
 
             // Check the user's RoleId to determine access level
             string accessMessage;
@@ -88,7 +92,7 @@ namespace WebApplication1.Controllers
             }
 
             // Return token and role-related information
-            return Ok(new { Token = token, userId = user.UserId, message = accessMessage,email=user.Email });
+            return Ok(new { Token = token, userId = user.UserId, message = accessMessage,email=user.Email,instructorId=InstructorId});
         }
 
 
@@ -422,6 +426,37 @@ namespace WebApplication1.Controllers
 
 
         }
+
+        [HttpPost("create-instructor-password")]
+        public ActionResult CreateInstructorPassword([FromForm] string email, [FromForm] string password)
+        {
+            // Validate input
+            if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
+            {
+                return BadRequest("Email and password are required.");
+            }
+
+            // Find the instructor by email (assuming your database context is `dbContext`)
+            var instructor = _db.Instructors.FirstOrDefault(i => i.Email == email);
+            if (instructor == null)
+            {
+                return NotFound("Instructor not found.");
+            }
+
+            // Hash the password
+            byte[] passwordHash, passwordSalt;
+            PasswordHasher.CreatePasswordHash(password, out passwordHash, out passwordSalt);
+
+            // Update instructor's password hash and salt
+            instructor.PasswordHash = passwordHash;
+            instructor.PasswordSalt = passwordSalt;
+
+            // Save changes to the database
+            _db.SaveChanges();
+
+            return Ok("Password updated successfully.");
+        }
+
 
 
 

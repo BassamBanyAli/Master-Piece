@@ -291,6 +291,25 @@
 	<script src="vendor/bootstrap-select/docs/docs/dist/js/bootstrap-select.js"></script>
 	<script src="js/custom.js"></script>	
 	<script src="js/night-mode.js"></script>
+	<script>
+		// Check if the ID exists in local storage
+		const userId = localStorage.getItem('id'); // Replace 'id' with the actual key name you use in local storage
+	
+		// Select the back link elements
+		const backLinks = document.querySelectorAll('.back_link a');
+	
+		// Update the href based on the presence of the ID
+		backLinks.forEach(link => {
+			link.href = userId ? 'index.html' : 'beforeLogin/indexBeforeLogin.html';
+		});
+	
+		// Update the main logo links
+		const logoLinks = document.querySelectorAll('.main_logo a');
+		logoLinks.forEach(link => {
+			link.href = userId ? 'index.html' : 'beforeLogin/indexBeforeLogin.html';
+		});
+	</script>
+	
 	
 </body>
 

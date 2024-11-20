@@ -45,13 +45,13 @@
 			<div class="row">
 				<div class="col-12">
 					<div class="back_link">
-						<a href="..//beforeLogin/indexBeforeLogin.html" class="hde151">Back To Cursus</a>
-						<a href="..//beforeLogin/indexBeforeLogin.html" class="hde152">Back</a>
+						<a href="../beforeLogin/indexBeforeLogin.html" class="hde151">Back To Cursus</a>
+						<a href="../beforeLogin/indexBeforeLogin.html" class="hde152">Back</a>
 					</div>
 					<div class="ml_item">
 						<div class="main_logo main_logo15" id="logo">
-							<a href="..//beforeLogin/indexBeforeLogin.html"><img src="../images/logo.svg" alt=""></a>
-							<a href="..//beforeLogin/indexBeforeLogin.html"><img class="logo-inverse" src="../images/ct_logo.svg" alt=""></a>
+							<a href="../beforeLogin/indexBeforeLogin.html"><img src="../images/logo.svg" alt=""></a>
+							<a href="../beforeLogin/indexBeforeLogin.html"><img class="logo-inverse" src="../images/ct_logo.svg" alt=""></a>
 						</div>				
 					</div>				
 					<div class="header_right pr-0">
@@ -318,6 +318,25 @@
 		map.addControl(new mapboxgl.NavigationControl());
 		});						
 	</script>
+	<script>
+		// Check if the ID exists in local storage
+		const userId = localStorage.getItem('id'); // Replace 'id' with the actual key name you use in local storage
+	
+		// Select the back link elements
+		const backLinks = document.querySelectorAll('.back_link a');
+	
+		// Update the href based on the presence of the ID
+		backLinks.forEach(link => {
+			link.href = userId ? '../index.html' : '../beforeLogin/indexBeforeLogin.html';
+		});
+	
+		// Update the main logo links
+		const logoLinks = document.querySelectorAll('.main_logo a');
+		logoLinks.forEach(link => {
+			link.href = userId ? '../index.html' : '../beforeLogin/indexBeforeLogin.html';
+		});
+	</script>
+	
 	
 </body>
 

@@ -1,3 +1,11 @@
+
+
+
+
+
+
+
+
 async function getProfile() {
     debugger;
     var id = localStorage.getItem("id");
@@ -19,7 +27,7 @@ async function getProfile() {
 
         } else {
             const errorData = await response.json();
-            alert('Error: ' + (errorData.message || 'Profile retrieval failed'));
+
         }
     } catch (error) {
         console.error('Error:', error);

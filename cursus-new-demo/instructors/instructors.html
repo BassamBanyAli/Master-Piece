@@ -46,8 +46,8 @@
 			<span class="collapse_menu--label"></span>
 		</button>
 		<div class="main_logo" id="logo">
-			<a href="index.html"><img src="../images/logo.svg" alt=""></a>
-			<a href="index.html"><img class="logo-inverse" src="../images/ct_logo.svg" alt=""></a>
+			<a href="../beforeLogin/indexBeforeLogin.html"><img src="../images/logo.svg" alt=""></a>
+			<a href="../beforeLogin/indexBeforeLogin.html"><img class="logo-inverse" src="../images/ct_logo.svg" alt=""></a>
 		</div>
 
 		<div class="header_right">
@@ -73,7 +73,7 @@
 			<div class="left_section">
 				<ul>
 					<li class="menu--item">
-						<a href="../index.html" class="menu--link" title="Home">
+						<a href="../beforeLogin/indexBeforeLogin.html" class="menu--link" title="Home">
 							<i class='uil uil-home-alt menu--icon'></i>
 							<span class="menu--label">Home</span>
 						</a>
@@ -248,7 +248,20 @@
 	<script src="instructors.js"></script>
 	
 	
-	
+	<script>
+		
+document.addEventListener("DOMContentLoaded", function() {
+    const courseDataArray = JSON.parse(localStorage.getItem("courseDataArray")) || [];
+    console.log(courseDataArray); // Check the value of courseDataArray
+    const cartItemCount = courseDataArray.length;
+    console.log(cartItemCount); // Check the item count
+    
+    const notiCountElement = document.querySelector(".noti_count");
+    if (notiCountElement) {
+        notiCountElement.textContent = cartItemCount;
+    }
+});
+	</script>
 </body>
 
 <!-- Mirrored from gambolthemes.net/html-items/cursus-new-demo/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 14 Sep 2024 14:17:59 GMT -->

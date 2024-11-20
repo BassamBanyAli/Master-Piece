@@ -130,7 +130,7 @@ async function myCourses() {
 
 
     document.addEventListener("DOMContentLoaded", function() {
-        const courseDataArray = JSON.parse(localStorage.getItem("courseDataArray")) || [];
+        const courseDataArray = JSON.parse(localStorage.getItem("newCourseDataArray")) || [];
         console.log(courseDataArray); // Check the value of courseDataArray
         const cartItemCount = courseDataArray.length;
         console.log(cartItemCount); // Check the item count

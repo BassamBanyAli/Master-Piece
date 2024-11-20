@@ -19,10 +19,12 @@ async function login(event) {
 
             // Display a specific alert based on the user's role message
             alert(result.message);
+            console.log(result);
 
             // Redirect based on role message
             if (result.message === "Accepted Instructor access granted.") {
                 localStorage.setItem("instructorEmail",result.email);
+                localStorage.setItem("instructorId", result.instructorId);
                 // Redirect to instructor dashboard if role is accepted instructor
                 window.location.href = "../instructor_dashboard.html";
             } else if (result.message !== "Instructor access pending approval." && 
